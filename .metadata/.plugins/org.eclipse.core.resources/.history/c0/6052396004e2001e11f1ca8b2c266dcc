@@ -1,0 +1,19 @@
+package com.ace.company_news.model;
+
+import org.mybatis.spring.SqlSessionTemplate;
+
+public class Company_newsDAOImple implements Company_newsDAO {
+
+	private SqlSessionTemplate sqlmap;
+
+	public Company_newsDAOImple(SqlSessionTemplate sqlmap) {
+		super();
+		this.sqlmap = sqlmap;
+	}
+	
+	@Override
+	public int company_newsWrite(Company_newsDTO dto) {
+		int count = sqlmap.insert("company_newsWrite" , dto);
+		return count;
+	}
+}

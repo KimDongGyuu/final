@@ -1,0 +1,11 @@
+package com.yong.file.model;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class FileUploadDTO {
+
+	private int com_idx ;
+	private int news_idx;
+	private MultipartFile news_file;
+
+}

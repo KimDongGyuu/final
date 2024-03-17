@@ -1,0 +1,16 @@
+package com.ace.company_news.model;
+
+import java.sql.*;
+
+public class Company_newsDTO {
+	private int com_idx ;
+	private int news_idx;
+	private String news_writer;
+	private String news_title;
+	private String news_content;
+	private Date news_writedate;
+	private int news_readnum;
+	private MultipartFile news_file;
+	
+
+}

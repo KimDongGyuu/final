@@ -1,0 +1,28 @@
+package com.ace.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ace.company_news.model.Company_newsDTO;
+import com.ace.company_news.service.company_newsService;
+
+@Controller
+public class Company_newsController {
+
+	@Autowired
+	private company_newsService company_newsService;
+	
+	@RequestMapping("company_news_List.do")
+	public String company_news_list() {
+		return "kdg/company_news/company_news_List";
+	}
+	
+	@RequestMapping("company_news_Writeform.do")
+	public String company_news_Writeform() {
+		return "kdg/company_news/company_news_Writeform";
+	}
+	
+
+}

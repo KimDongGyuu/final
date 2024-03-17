@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/style.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#left {
+	width: 200px;
+	height: 600px;
+	float: left;
+	border-right: 2px solid darkblue;
+	margin-left: 50px;
+}
+
+#right {
+	width: 900px;
+	height: 600px;
+	margin-left: 330px;
+}
+
+#bt {
+	width: 180px;
+	height: 40px;
+}
+
+h3 {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<div><h3>게시판 &gt;&gt; 회사소식</h3></div>
+	
+	<br>
+	<div>
+		<div id="left">
+			<button id="bt" type="button" class="btn btn-outline-primary"
+				onclick="location.href='company_news_Writeform.do';">글 작성</button>
+<div class="mt-3">회사소식 <br> 경조사</div>
+		</div>
+		<div id="right">
+			<table width="1000" cellspacing="0">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>등록자</th>
+						<th>등록일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td colspan="5" align="center">내용 들어갈 곳</td>
+					</tr>
+				</tbody>
+
+				<tfoot>
+					<tr>
+						<td colspan="5" align="center">페이징 들어갈 곳</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

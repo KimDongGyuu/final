@@ -1,0 +1,6 @@
+package com.ace.company_news.model;
+
+public interface Company_newsDAO {
+
+	public int company_newsWrite(Company_newsDTO dto);
+}

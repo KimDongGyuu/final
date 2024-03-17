@@ -1,0 +1,8 @@
+package com.ace.company_news.service;
+
+import com.ace.company_news.model.Company_newsDTO;
+
+public interface company_newsService {
+
+	public int company_news(Company_newsDTO dto);
+}

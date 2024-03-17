@@ -1,0 +1,9 @@
+package com.ace.company_news.model;
+
+import java.util.*;
+
+public interface Company_newsDAO {
+
+	public int company_newsWrite(Company_newsDTO dto);
+	public List<Company_newsDTO> company_newsList(Map map);
+}

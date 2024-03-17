@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+var count=2;
+function addFile(){
+   var fileId='file'+count;
+   
+   var newListNode=document.createElement('li');
+   newListNode.setAttribute('id',fileId);
+   
+   var newLabelNode=document.createElement('label');
+   var newLabelText=document.createTextNode('파일선택');
+   newLabelNode.appendChild(newLabelText);
+   var newInputNode=document.createElement('input');
+   newInputNode.setAttribute('type','file');
+   newInputNode.setAttribute('name','upload');
+   
+   var newInputNode2=document.createElement('input');
+   newInputNode2.setAttribute('type','button');
+   newInputNode2.setAttribute('value','삭제');
+   newInputNode2.setAttribute('onclick','delFile('+count+')');
+   
+   newListNode.appendChild(newLabelNode);
+   newListNode.appendChild(newInputNode);
+   newListNode.appendChild(newInputNode2);
+   
+   var ulNode=document.getElementById('fileUpload');
+   ulNode.appendChild(newListNode);
+   
+   count+=1;
+
+}
+function delFile(num){
+   var fileId='file'+num;
+   var ulNode=document.getElementById('fileUpload');
+   var listNode=document.getElementById(fileId);
+   ulNode.removeChild(listNode);
+}
+</script>
+</head>
+<body>
+	<h1>파일 업로드 테스트</h1>
+	<form name="fileUpload1" action="fileUpload1.do" method="post"
+		enctype="multipart/form-data">
+		<fieldset>
+			<legend>fileUpload1(@requestParam이용)</legend>
+			<ul>
+				<li><label>작성자</label><input type="text" name="writer"></li>
+				<li><label>파일선택</label><input type="file" name="upload"></li>
+			</ul>
+			<div>
+				<input type="submit" value="파일제출하기">
+			</div>
+		</fieldset>
+	</form>
+
+	<hr>
+
+	<form name="fileUpload2" action="fileUpload2.do" method="post"
+		enctype="multipart/form-data">
+		<fieldset>
+			<legend>fileUpload2(MultipartRequest이용)</legend>
+			<ul>
+				<li><label>작성자</label><input type="text" name="writer"></li>
+				<li><label>파일선택</label><input type="file" name="upload"></li>
+			</ul>
+			<div>
+				<input type="submit" value="파일제출하기">
+			</div>
+		</fieldset>
+	</form>
+
+	<hr>
+
+	<form name="fileUpload3" action="fileUpload3.do" method="post"
+		enctype="multipart/form-data">
+		<fieldset>
+			<legend>fileUpload3(DTO 이용)</legend>
+			<ul>
+				<li><label>작성자</label><input type="text" name="writer"></li>
+				<li><label>파일선택</label><input type="file" name="upload"></li>
+			</ul>
+			<div>
+				<input type="submit" value="파일제출하기">
+			</div>
+		</fieldset>
+	</form>
+
+	<hr>
+
+	<form name="fileIpload4" action="fileUpload4.do" method="post"
+		enctype="multipart/form-data">
+		<fieldset>
+			<legend>파일업로드4(다중 이용)</legend>
+			<input type="button" value="파일추가" onclick="addFile()">
+			<ul id="fileUpload">
+				<li><label>작성자</label><input type="text" name="writer"></li>
+				<li id="file1"><label>파일선택</label><input type="file"
+					name="upload"><input type="button" value="삭제"
+					onclick="delFile(1)"></li>
+			</ul>
+			<div>
+				<input type="submit" value="파일제출하기">
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>

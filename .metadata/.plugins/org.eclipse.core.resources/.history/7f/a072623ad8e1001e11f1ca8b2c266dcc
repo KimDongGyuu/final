@@ -1,0 +1,18 @@
+package com.ace.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class Company_newsController {
+
+	@RequestMapping("company_news_List.do")
+	public String company_news_list() {
+		return "kdg/company_news/company_news_List";
+	}
+	
+	@RequestMapping("company_news_WriteForm.do")
+	public String company_news_WriteForm() {
+		return "kdg/company_news/company_news_WriteForm";
+	}
+}
