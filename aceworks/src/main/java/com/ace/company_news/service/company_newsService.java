@@ -15,4 +15,5 @@ public interface company_newsService {
 	public int company_newsUpdate(Company_newsDTO dto);
 	public int company_newsReadnumUpdate(int news_idx );
 	public List<Company_newsDTO> company_newsSearch(String keyword);
+
 }

@@ -41,9 +41,11 @@ private company_newsService company_newsService;
 	
 	@RequestMapping("/company_newsSearch.do")
 	public ModelAndView company_newsSearch(@RequestParam("keyword")String keyword) {
+
 		List<Company_newsDTO> list = company_newsService.company_newsSearch(keyword);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("lists",list);
+
 		mav.setViewName("company_news/company_news_Search");
 		return mav;
 	}

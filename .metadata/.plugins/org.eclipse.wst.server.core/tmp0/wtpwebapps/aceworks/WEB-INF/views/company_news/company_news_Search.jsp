@@ -88,7 +88,7 @@ h3 {
 
 				<tfoot>
 					<tr>
-						<td colspan="5" align="center">페이징</td>
+						<td colspan="5" align="center"></td>
 					</tr>
 				</tfoot>
 			</table>

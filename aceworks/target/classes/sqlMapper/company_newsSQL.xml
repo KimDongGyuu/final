@@ -16,7 +16,7 @@
 	where rnum <![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
 	</select>
 	
-	<select id="company_newsSearch" parameterType="String" resultType="com.ace.company_news.model.Company_newsDTO">
+	<select id="company_newsSearch" parameterType="String" resultType="com.ace.company_news.model.Company_newsDTO">	
 	select * from company_news where news_title like '%' || #{keyword} || '%' order by news_idx desc
 	</select>
 	
