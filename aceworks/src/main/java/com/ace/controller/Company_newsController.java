@@ -29,7 +29,7 @@ private company_newsService company_newsService;
 		int listSize = 10;
 		int pageSize = 5;
 		
-		String pageStr = com.ace.page.pageMaker.makePage("company_news_List.do", totalCnt, listSize, pageSize, cp);
+		String pageStr = com.ace.page.company_news_ListPage.makePage("company_news_List.do", totalCnt, listSize, pageSize, cp);
 		
 		List<Company_newsDTO> list = company_newsService.company_newsList(cp,listSize);
 		ModelAndView mav = new ModelAndView();
@@ -40,13 +40,24 @@ private company_newsService company_newsService;
 	}
 	
 	@RequestMapping("/company_newsSearch.do")
-	public ModelAndView company_newsSearch(@RequestParam("keyword")String keyword) {
+	public ModelAndView company_newsSearch(@RequestParam("keyword")String keyword,@RequestParam(value = "cp", defaultValue = "1") int cp) {
 
-		List<Company_newsDTO> list = company_newsService.company_newsSearch(keyword);
+		int totalCnt = company_newsService.SearchGetTotalCnt(keyword);
+		int listSize = 10;
+		int pageSize = 5;
+
+		String pageStr = com.ace.page.company_newsSearchPage.makePage("company_newsSearch.do", totalCnt, listSize, pageSize, cp, keyword);
+
+		List<Company_newsDTO> list = company_newsService.company_newsSearch(keyword,cp,listSize);
+
 		ModelAndView mav = new ModelAndView();
+
 		mav.addObject("lists",list);
 
+		mav.addObject("pageStr",pageStr);
+
 		mav.setViewName("company_news/company_news_Search");
+
 		return mav;
 	}
 	

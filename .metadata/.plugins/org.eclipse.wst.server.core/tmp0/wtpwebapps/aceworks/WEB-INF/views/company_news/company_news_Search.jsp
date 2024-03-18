@@ -26,10 +26,9 @@
 	width: 180px;
 	height: 40px;
 }
-
 #Sbt {
-	width: 70px;
-	height: 45px;
+	padding-top: 2px;
+	height: 30px;
 }
 
 h3 {
@@ -67,7 +66,7 @@ h3 {
 				<tbody class="table-group-divider">
 					<c:if test="${empty lists }">
 						<tr>
-							<td colspan="5" align="center">등록된 게시물이 없습니다</td>
+							<td colspan="5" align="center">검색된 게시물이 없습니다</td>
 						</tr>
 					</c:if>
 
@@ -88,7 +87,7 @@ h3 {
 
 				<tfoot>
 					<tr>
-						<td colspan="5" align="center"></td>
+						<td colspan="5" align="center">${pageStr }</td>
 					</tr>
 				</tfoot>
 			</table>

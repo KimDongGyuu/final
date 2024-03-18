@@ -14,6 +14,6 @@ public interface company_newsService {
 	public Company_newsDTO company_newsUpdateForm(int news_idx);
 	public int company_newsUpdate(Company_newsDTO dto);
 	public int company_newsReadnumUpdate(int news_idx );
-	public List<Company_newsDTO> company_newsSearch(String keyword);
-
+	public List<Company_newsDTO> company_newsSearch(String keyword,int cp,int Ls);
+	public int SearchGetTotalCnt(String keyword);
 }
