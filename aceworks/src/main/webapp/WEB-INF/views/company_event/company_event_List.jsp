@@ -47,9 +47,9 @@ h3 {
 		<div class="mt-5 mb-2"><span class="h4">게시판 &gt;&gt; 임직원 경조사</span></div>
 <div class="mt-2 d-flex gap-2 justify-content-end">
 
-   <form action="">
+   <form action="company_eventSearch.do">
    <input type="hidden" name="com_idx" value="${dto.getCom_idx()}">
-        <input type="text" id="" name="" placeholder="검색어를 입력하세요." style="width:70%; height: 35px;">
+        <input type="text" id="eventSearchKeyword" name="eventKeyword" placeholder="검색어를 입력하세요." style="width:70%; height: 35px;">
         <button id="Sbt" type="submit" class="btn btn btn-primary">검색</button>
    </form>
     

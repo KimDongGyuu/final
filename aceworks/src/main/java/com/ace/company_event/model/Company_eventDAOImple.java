@@ -37,4 +37,46 @@ public class Company_eventDAOImple implements Company_eventDAO {
 		Company_eventDTO eventDto = sqlmap.selectOne("company_eventContnet",map);
 		return eventDto;
 	}
+	
+	@Override
+	public List<Company_eventDTO> company_eventSearch(Map map) {
+		List<Company_eventDTO> evenList = sqlmap.selectList("company_eventSearch",map);
+		return evenList;
+	}
+	
+	@Override
+	public int searchGetEventTotalCnt(Map map) {
+		int count = sqlmap.selectOne("eventSearchTotalCnt",map);
+		return count;
+	}
+	
+	@Override
+	public int company_eventDelete(int event_idx) {
+		int count = sqlmap.delete("company_eventDelete",event_idx);
+		return count;
+	}
+	
+	@Override
+	public Company_eventDTO company_eventUpdateForm(int event_idx) {
+		Company_eventDTO eventDto = sqlmap.selectOne("company_eventUpdateForm",event_idx);
+		return eventDto;
+	}
+	
+	@Override
+	public int company_eventUpdate(Company_eventDTO eventDto) {
+		int count = sqlmap.update("company_eventUpdate",eventDto);
+		return count;
+	}
+	
+	@Override
+	public Company_eventDTO company_eventPreviousEvent(Map map) {
+		Company_eventDTO eventDto = sqlmap.selectOne("company_eventPreviousEvent",map);
+		return eventDto;
+	}
+	
+	@Override
+	public Company_eventDTO company_eventNextEvent(Map map) {
+		Company_eventDTO eventDto = sqlmap.selectOne("company_eventNextEvent",map);
+		return eventDto;
+	}
 }

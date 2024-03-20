@@ -1,6 +1,6 @@
 package com.ace.company_event.service;
 
-import java.util.List;
+import java.util.*;
 
 import com.ace.company_event.model.Company_eventDTO;
 
@@ -10,4 +10,11 @@ public interface company_eventService {
 	public List<Company_eventDTO> company_eventList(int com_idx,int cp,int Ls);
 	public int getEventTotalCnt(int com_idx);
 	public Company_eventDTO company_eventContent(int event_idx , int com_idx);
+	public List<Company_eventDTO> company_eventSearch(int com_idx,String eventKeyword,int cp,int Ls);
+	public int searchGetEventTotalCnt(String eventKeyword,int com_idx);
+	public int company_eventDelete(int event_idx);
+	public Company_eventDTO company_eventUpdateForm(int event_idx);
+	public int company_eventUpdate(Company_eventDTO eventDto);
+	public Company_eventDTO company_eventPreviousEvent(int event_idx,int com_idx);
+	public Company_eventDTO company_eventNextEvent(int event_idx,int com_idx);
 }

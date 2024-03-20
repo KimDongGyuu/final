@@ -95,17 +95,28 @@ h3 {
 						<td colspan="6" align="left" valign="top">${newsDto.news_content }</td>
 					</tr>
 				</table>
+				
+				<c:if test="${dto.rank_num == 2 || dto.rank_num == 1}">
+					<div class="d-flex justify-content-center">
+						<button id="bt" type="button" class="btn btn-outline-primary"
+							onclick="location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
+						&nbsp; &nbsp;
+						<button id="bt" type="button" class="btn btn-outline-success"
+							onclick="updateNews(${newsDto.news_idx});">수정</button>
+						&nbsp; &nbsp;
+						<button id="bt" type="button" class="btn btn-outline-danger"
+							onclick="deleteNews(${newsDto.news_idx});">삭제</button>
+					</div>
+				</c:if>
+				
+				<c:if test="${dto.rank_num == 3}">
+					<div class="d-flex justify-content-center">
+						<button id="bt" type="button" class="btn btn-outline-primary"
+							onclick="location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
+	
+					</div>
+				</c:if>
 
-				<div class="d-flex justify-content-center">
-					<button id="bt" type="button" class="btn btn-outline-primary"
-						onclick="location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
-					&nbsp; &nbsp;
-					<button id="bt" type="button" class="btn btn-outline-success"
-						onclick="updateNews(${newsDto.news_idx});">수정</button>
-					&nbsp; &nbsp;
-					<button id="bt" type="button" class="btn btn-outline-danger"
-						onclick="deleteNews(${newsDto.news_idx});">삭제</button>
-				</div>
 			</div>
 		</div>
 	</div>

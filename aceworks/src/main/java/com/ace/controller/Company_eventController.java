@@ -62,4 +62,82 @@ public class Company_eventController {
 		mav.setViewName("company_event/company_event_Content");
 		return mav;
 	}
+	
+	@RequestMapping("/company_eventSearch")
+	public ModelAndView company_eventSearch(@RequestParam("com_idx")int com_idx,@RequestParam("eventKeyword")String eventKeyword,@RequestParam(value = "cp", defaultValue = "1") int cp) {
+		int totalCnt = company_eventService.searchGetEventTotalCnt(eventKeyword, com_idx);
+		int listSize = 10;
+		int pageSize = 5;
+		String pageStr = com.ace.page.company_eventSearchPage.makePage("company_eventSearch.do", totalCnt, listSize, pageSize, cp, eventKeyword, com_idx);
+		List<Company_eventDTO> eventList = company_eventService.company_eventSearch(com_idx, eventKeyword, cp, listSize);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("com_idx",com_idx);
+		mav.addObject("eventKeyword",eventKeyword);
+		mav.addObject("eventList",eventList);
+		mav.addObject("pageStr",pageStr);
+		mav.setViewName("company_event/company_event_Search");
+		return mav;
+	}
+	
+	@RequestMapping("/company_event_Delete")
+	public ModelAndView company_eventDelete(@RequestParam("event_idx")int event_idx) {
+		int result = company_eventService.company_eventDelete(event_idx);
+		String msg = result > 0? "게시물이 삭제 되었습니다.":"게시물 삭제에 실패 하였습니다.";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.setViewName("company_event/company_eventMsg");
+		return mav;
+	}
+	
+	@RequestMapping("/company_event_UpdateForm")
+	public ModelAndView company_eventUpdateForm(@RequestParam("event_idx")int event_idx) {
+		Company_eventDTO eventDto = company_eventService.company_eventUpdateForm(event_idx);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("event_idx", event_idx);
+		mav.addObject("eventDto", eventDto);
+		mav.setViewName("company_event/company_event_UpdateForm");
+		return mav;
+	}
+	
+	@RequestMapping("/company_eventUpdate.do")
+	public ModelAndView company_eventUpdate(Company_eventDTO eventDto) {
+		int result = company_eventService.company_eventUpdate(eventDto);
+		System.out.println(result);
+		String msg = result>0?"게시글이 수정되었습니다.":"게시글 수정에 실패 하였습니다.";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg",msg);
+		mav.setViewName("company_event/company_eventMsg");
+		return mav;
+	}
+	
+	@RequestMapping("/company_event_PreviousEvent.do")
+	public ModelAndView comcompany_eventPreviousEvent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx")Integer com_idx) {
+		Company_eventDTO eventDto = company_eventService.company_eventPreviousEvent(event_idx, com_idx);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("eventDto",eventDto);
+		mav.addObject("event_idx",event_idx);
+		mav.addObject("com_idx",com_idx);
+		mav.setViewName("company_event/company_event_PreviousEvent");
+		return mav;
+	}
+	
+	@RequestMapping("/company_event_NextEvent")
+	public ModelAndView company_eventNextEvent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx")Integer com_idx) {
+		Company_eventDTO eventDto = company_eventService.company_eventNextEvent(event_idx, com_idx);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("eventDto",eventDto);
+		mav.addObject("event_idx",event_idx);
+		mav.addObject("com_idx",com_idx);
+		mav.setViewName("company_event/company_event_NextEvent");
+		return mav;
+	}
 }
+
+
+
+
+
+
+
+
+

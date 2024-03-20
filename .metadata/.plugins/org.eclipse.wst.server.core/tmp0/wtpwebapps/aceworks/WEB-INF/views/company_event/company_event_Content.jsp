@@ -7,6 +7,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+function deleteEvent(event_idx) {
+    var url = 'company_event_Delete.do?event_idx=' + event_idx;
+    window.location.href = url;
+}
+function updateEvent(event_idx) {
+	var url = 'company_event_UpdateForm.do?event_idx=' + event_idx;
+    window.location.href = url;
+}
+function previousEvent(event_idx,com_idx) {
+	var url = 'company_event_PreviousEvent.do?event_idx=' + event_idx+'&com_idx='+com_idx;
+	window.location.href = url;
+}
+function nextEvent(event_idx,com_idx) {
+	var url = 'company_event_NextEvent.do?event_idx=' + event_idx+'&com_idx='+com_idx;
+	window.location.href = url;
+}
+</script>
 <style>
 #left {
 	width: 200px;
@@ -57,9 +75,9 @@ h3 {
 					<span class="h4">임직원 경조사&gt;&gt;${eventDto.event_idx }번 게시글</span>&nbsp;
 					&nbsp;
 					<button id="PNbt" type="button" class="btn btn-outline-dark"
-						onclick="">이전글</button>
+						onclick="previousEvent(${eventDto.event_idx},${dto.getCom_idx()});">이전글</button>
 					<button id="PNbt" type="button" class="btn btn-outline-dark"
-						onclick="">다음글</button>
+						onclick="nextEvent(${eventDto.event_idx},${dto.getCom_idx()});">다음글</button>
 				</div>
 				
 				<table width="1000" cellspacing="0" class="table">
@@ -93,7 +111,7 @@ h3 {
 						</td>
 
 						<td>
-						찾아오시는길
+						<h5>찾아오시는 길</h5>
 						<div id="map" class="d-flex justify-content-center"></div>
 					
 					    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -139,10 +157,10 @@ h3 {
 						onclick="location.href='company_event_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
 					&nbsp; &nbsp;
 					<button id="bt" type="button" class="btn btn-outline-success"
-						onclick="">수정</button>
+						onclick="updateEvent(${eventDto.event_idx});">수정</button>
 					&nbsp; &nbsp;
 					<button id="bt" type="button" class="btn btn-outline-danger"
-						onclick="">삭제</button>
+						onclick="deleteEvent(${eventDto.event_idx});">삭제</button>
 				</div>
 			</div>
 		</div>

@@ -25,7 +25,6 @@
 	width: 180px;
 	height: 40px;
 }
-
 </style>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -61,7 +60,7 @@
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 //document.getElementById('sample4_postcode1').value = data.zonecode;
                 document.getElementById("sample4_roadAddress").value = roadAddr;
-                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+               // document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
                 
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                 if(roadAddr !== ''){
@@ -77,10 +76,6 @@
                     guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
                     guideTextBox.style.display = 'block';
 
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
                 } else {
                     guideTextBox.innerHTML = '';
                     guideTextBox.style.display = 'none';
@@ -93,10 +88,11 @@
 function sb(event) {
 	// addr1 = document.getElementById('sample4_postcode').value;
 	var addr2 = document.getElementById('sample4_roadAddress').value;
-	var addr3 = document.getElementById('sample4_jibunAddress').value;
+	//var addr3 = document.getElementById('sample4_jibunAddress').value;
 	var addr4 = document.getElementById('sample4_detailAddress').value;
 	var addr5 = document.getElementById('sample4_extraAddress').value;
-	var fullAddr = addr2 + '/' + addr3 + '/' + addr4 + '/' + addr5;
+	//var fullAddr = addr2 + '/' + addr3 + '/' + addr4 + '/' + addr5;
+	var fullAddr = addr2 + '/'+ addr4 + '/' + addr5;
 	document.getElementById('event_addr').value = fullAddr;
 	document.getElementById('event_addr').submit();
 }
@@ -132,7 +128,7 @@ function sb(event) {
 		<div class="mb-2 d-flex gap-2">
 		<input type="button" class="btn btn-outline-primary" onclick="sample4_execDaumPostcode()" value="주소검색">
 		<input type="text" class="form-control" id="sample4_roadAddress" name="addr2" placeholder="도로명주소">
-		<input type="text" class="form-control" id="sample4_jibunAddress" name="addr3" placeholder="지번주소">
+		
 		<span id="guide" style="color:#999;display:none"></span>
 		</div>
 		<div class="mb-2 d-flex gap-2">

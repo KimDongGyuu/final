@@ -1,6 +1,6 @@
 package com.ace.company_news.service;
 
-import java.util.List;
+import java.util.*;
 
 import com.ace.company_news.model.Company_newsDTO;
 

@@ -52,4 +52,65 @@ public class company_eventServiceImple implements company_eventService {
 		Company_eventDTO eventDto = Company_eventDao.company_eventContent(map);
 		return eventDto;
 	}
+	
+	@Override
+	public List<Company_eventDTO> company_eventSearch(int com_idx, String eventKeyword, int cp, int ls) {
+		int start = (cp-1)*ls+1;
+		int end = cp*ls;
+		Map map = new HashMap();
+		map.put("com_idx", com_idx);
+		map.put("eventKeyword", eventKeyword);
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<Company_eventDTO> eventList = Company_eventDao.company_eventSearch(map);
+		return eventList;
+	}
+	
+	@Override
+	public int searchGetEventTotalCnt(String eventKeyword, int com_idx) {
+		Map map = new HashMap();
+		map.put("com_idx", com_idx);
+		map.put("eventKeyword", eventKeyword);
+		
+		int count = Company_eventDao.searchGetEventTotalCnt(map);
+		return count;
+	}
+	
+	@Override
+	public int company_eventDelete(int event_idx) {
+		int count = Company_eventDao.company_eventDelete(event_idx);
+		return count;
+	}
+	
+	@Override
+	public Company_eventDTO company_eventUpdateForm(int event_idx) {
+		Company_eventDTO eventDto = Company_eventDao.company_eventUpdateForm(event_idx);
+		return eventDto;
+	}
+	
+	@Override
+	public int company_eventUpdate(Company_eventDTO eventDto) {
+		int count = Company_eventDao.company_eventUpdate(eventDto);
+		return count;
+	}
+	
+	@Override
+	public Company_eventDTO company_eventPreviousEvent(int event_idx, int com_idx) {
+		Map map = new HashMap();
+		map.put("event_idx", event_idx);
+		map.put("com_idx", com_idx);
+		Company_eventDTO eventDto = Company_eventDao.company_eventPreviousEvent(map);
+		
+		return eventDto;
+	}
+	
+	@Override
+	public Company_eventDTO company_eventNextEvent(int event_idx, int com_idx) {
+		Map map = new HashMap();
+		map.put("event_idx", event_idx);
+		map.put("com_idx", com_idx);
+		Company_eventDTO eventDto = Company_eventDao.company_eventNextEvent(map);
+		return eventDto;
+	}
 }

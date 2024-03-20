@@ -22,5 +22,38 @@ select * from company_event where event_idx=#{event_idx} and com_idx=#{com_idx}
 <select id="eventTotalCnt" parameterType="Integer" resultType="Integer">
 select count(*) from company_event where com_idx=#{com_idx}
 </select>
+
+<select id="company_eventSearch" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
+select * from
+(select rownum as rnum,a.*from
+(select * from company_event where com_idx=#{com_idx} and event_title like '%' || #{eventKeyword} || '%' order by event_idx desc)a)b 
+where rnum <![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+</select>
+
+<select id="eventSearchTotalCnt" parameterType="java.util.Map" resultType="Integer">
+select count(*) from company_event where event_title like '%' || #{eventKeyword} || '%' and com_idx=#{com_idx}
+</select>
+
+<delete id="company_eventDelete" parameterType="Integer">
+delete from company_event where event_idx=#{event_idx}
+</delete>
+
+<select id="company_eventUpdateForm" parameterType="Integer" resultType="com.ace.company_event.model.Company_eventDTO">
+select * from company_event where event_idx=#{event_idx}
+</select>
+
+<update id="company_eventUpdate" parameterType="com.ace.company_event.model.Company_eventDTO">
+update company_event set event_title=#{event_title},event_writer=#{event_writer},event_addr=#{event_addr},event_content=#{event_content} where event_idx=#{event_idx}
+</update>
+
+<select id="company_eventPreviousEvent" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
+select * from (select * from company_event where com_idx=#{com_idx} and event_writedate <![CDATA[<]]> (select event_writedate from company_event where event_idx=#{event_idx})order by event_writedate desc)
+where rownum = 1
+</select>
+
+<select id="company_eventNextEvent" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
+select * from (select * from company_event where com_idx=#{com_idx} and event_writedate <![CDATA[>]]> (select event_writedate from company_event where event_idx=#{event_idx})order by event_writedate asc)
+where rownum = 1
+</select>
 </mapper>
 
