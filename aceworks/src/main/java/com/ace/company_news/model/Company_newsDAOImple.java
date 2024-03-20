@@ -15,8 +15,8 @@ public class Company_newsDAOImple implements Company_newsDAO {
 	}
 	
 	@Override
-	public int company_newsWrite(Company_newsDTO dto) {
-		int count = sqlmap.insert("company_newsWrite" , dto);
+	public int company_newsWrite(Company_newsDTO newsDto) {
+		int count = sqlmap.insert("company_newsWrite" , newsDto);
 		return count;
 	}
 	
@@ -28,29 +28,26 @@ public class Company_newsDAOImple implements Company_newsDAO {
 	
 	@Override
 	public List<Company_newsDTO> company_newsSearch(Map map) {
-		
-	
 		List<Company_newsDTO> list = sqlmap.selectList("company_newsSearch",map);
 		return list;
 	}
 	
 	@Override
-	public int SearchGetTotalCnt(String keyword) {
-		int count = sqlmap.selectOne("SearchTotalCnt",keyword);
+	public int SearchGetTotalCnt(Map map) {
+		int count = sqlmap.selectOne("SearchTotalCnt",map);
 		return count;
 	}
 	
 	@Override
-	public int getTotalCnt() {
-		int count = sqlmap.selectOne("totalCnt");
+	public int getTotalCnt(int news_idx) {
+		int count = sqlmap.selectOne("totalCnt",news_idx);
 		return count;
 	}
 	
 	@Override
-	public Company_newsDTO company_newsContent(int news_idx) {
-		Company_newsDTO dto = sqlmap.selectOne("company_newsContent",news_idx);
-		
-		return dto;
+	public Company_newsDTO company_newsContent(Map map) {
+		Company_newsDTO newsDto = sqlmap.selectOne("company_newsContent",map);
+		return newsDto;
 	}
 	
 	@Override
@@ -61,13 +58,13 @@ public class Company_newsDAOImple implements Company_newsDAO {
 	
 	@Override
 	public Company_newsDTO company_newsUpdateForm(int news_idx) {
-		Company_newsDTO dto = sqlmap.selectOne("company_newsUpdateForm",news_idx);
-		return dto;
+		Company_newsDTO newsDto = sqlmap.selectOne("company_newsUpdateForm",news_idx);
+		return newsDto;
 	}
 	
 	@Override
-	public int company_newsUpdate(Company_newsDTO dto) {
-		int count = sqlmap.delete("company_newsUpdate",dto);
+	public int company_newsUpdate(Company_newsDTO newsDto) {
+		int count = sqlmap.update("company_newsUpdate",newsDto);
 		return count;
 	}
 	
@@ -75,6 +72,18 @@ public class Company_newsDAOImple implements Company_newsDAO {
 	public int company_newsReadnumUpdate(int news_idx) {
 		int count = sqlmap.update("company_newsReadnumUpdate",news_idx);
 		return count;
+	} 
+	
+	@Override
+	public Company_newsDTO company_newsPreviousNews(Map map) {
+		Company_newsDTO newsDto = sqlmap.selectOne("company_newsPreviousNews",map);
+		return newsDto;
+	}
+	
+	@Override
+	public Company_newsDTO company_newsNextNews(Map map) {
+		Company_newsDTO newsDto = sqlmap.selectOne("company_newsNextNews",map);
+		return newsDto;
 	}
 }
 

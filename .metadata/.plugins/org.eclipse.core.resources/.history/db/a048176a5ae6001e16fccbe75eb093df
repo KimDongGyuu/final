@@ -1,0 +1,19 @@
+package com.ace.company_event.model;
+
+import org.mybatis.spring.SqlSessionTemplate;
+
+public class Company_eventDAOImple implements Company_eventDAO {
+
+	private SqlSessionTemplate sqlmap;
+	
+	public Company_eventDAOImple(SqlSessionTemplate sqlmap) {
+		super();
+		this.sqlmap = sqlmap;
+	}
+	
+	@Override
+	public int company_eventWrite(Company_eventDTO eventDto) {
+		int count = sqlmap.insert("company_eventWrite",eventDto);
+		return count;
+	}
+}

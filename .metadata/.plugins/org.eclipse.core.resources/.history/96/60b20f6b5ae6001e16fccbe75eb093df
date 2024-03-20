@@ -1,0 +1,6 @@
+package com.ace.company_event.model;
+
+public interface Company_eventDAO {
+	
+	public int company_eventWrite(Company_eventDTO eventDto);
+}

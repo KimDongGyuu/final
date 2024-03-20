@@ -5,5 +5,7 @@
   <configuration>
   <mappers>
   	<mapper resource="sqlMapper/company_newsSQL.xml"/>
+  	<mapper resource="sqlMapper/memberSQL.xml"/>
+  	<mapper resource="sqlMapper/company_eventSQL.xml"/>
   </mappers>
   </configuration>

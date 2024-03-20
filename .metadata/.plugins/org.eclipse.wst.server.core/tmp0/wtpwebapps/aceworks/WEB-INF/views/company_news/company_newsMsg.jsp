@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 window.alert('${msg}');
-location.href='company_news_List.do';
+location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';
 </script>

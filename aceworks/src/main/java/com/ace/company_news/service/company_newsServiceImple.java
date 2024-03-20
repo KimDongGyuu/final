@@ -24,16 +24,17 @@ public class company_newsServiceImple implements company_newsService {
 
 
 	@Override
-	public int company_newsWrite(Company_newsDTO dto) {
-		int count = company_newsDao.company_newsWrite(dto);
+	public int company_newsWrite(Company_newsDTO newsDto) {
+		int count = company_newsDao.company_newsWrite(newsDto);
 		return count;
 	}
 	
 	@Override
-	public List<Company_newsDTO> company_newsList(int cp,int ls) {
+	public List<Company_newsDTO> company_newsList(int com_idx,int cp,int ls) {
 		int start = (cp-1)*ls+1;
 		int end = cp*ls;
 		Map map = new HashMap();
+		map.put("com_idx", com_idx);
 		map.put("start", start);
 		map.put("end", end);
 		
@@ -42,11 +43,12 @@ public class company_newsServiceImple implements company_newsService {
 	}
 	
 	@Override
-	public List<Company_newsDTO> company_newsSearch(String keyword,int cp,int ls) {
-		System.out.println(keyword);
+	public List<Company_newsDTO> company_newsSearch(int com_idx,String keyword,int cp,int ls) {
+
 		int start = (cp-1)*ls+1;
 		int end = cp*ls;
 		Map map = new HashMap();
+		map.put("com_idx", com_idx);
 		map.put("keyword", keyword);
 		map.put("start", start);
 		map.put("end", end);
@@ -55,22 +57,28 @@ public class company_newsServiceImple implements company_newsService {
 	}
 	
 	@Override
-	public int SearchGetTotalCnt(String keyword) {
-		int count = company_newsDao.SearchGetTotalCnt(keyword);
+	public int SearchGetTotalCnt(String keyword,int com_idx) {
+		Map map = new HashMap();
+		map.put("com_idx", com_idx);
+		map.put("keyword", keyword);
+		int count = company_newsDao.SearchGetTotalCnt(map);
 		return count;
 }
 	
 	@Override
-	public int getTotalCnt() {
-		int count = company_newsDao.getTotalCnt();
+	public int getTotalCnt(int com_idx) {
+		int count = company_newsDao.getTotalCnt(com_idx);
 		count = count == 0?1:count;
 		return count;
 	}
 	
 	@Override
-	public Company_newsDTO company_newsContent(int news_idx) {
-		Company_newsDTO dto = company_newsDao.company_newsContent(news_idx);
-		return dto;
+	public Company_newsDTO company_newsContent(int news_idx,int com_idx) {
+		Map map = new HashMap();
+		map.put("com_idx", com_idx);
+		map.put("news_idx", news_idx);
+		Company_newsDTO newsDto = company_newsDao.company_newsContent(map);
+		return newsDto;
 		
 	}
 	
@@ -82,13 +90,13 @@ public class company_newsServiceImple implements company_newsService {
 	
 	@Override
 	public Company_newsDTO company_newsUpdateForm(int news_idx) {
-		Company_newsDTO dto = company_newsDao.company_newsUpdateForm(news_idx);
-		return dto;
+		Company_newsDTO newsDto = company_newsDao.company_newsUpdateForm(news_idx);
+		return newsDto;
 	}
 	
 	@Override
-	public int company_newsUpdate(Company_newsDTO dto) {
-		int count = company_newsDao.company_newsUpdate(dto);
+	public int company_newsUpdate(Company_newsDTO newsDto) {
+		int count = company_newsDao.company_newsUpdate(newsDto);
 		return count;
 	}
 	
@@ -96,6 +104,25 @@ public class company_newsServiceImple implements company_newsService {
 	public int company_newsReadnumUpdate(int news_idx) {
 		int count = company_newsDao.company_newsReadnumUpdate(news_idx);
 		return count;
+	}
+	
+	@Override
+	public Company_newsDTO company_newsPreviousNews(int news_idx,int com_idx) {
+		Map map = new HashMap();
+		map.put("news_idx", news_idx);
+		map.put("com_idx", com_idx);
+		
+		Company_newsDTO newsDto = company_newsDao.company_newsPreviousNews(map);
+		return newsDto;
+	}
+
+	@Override
+	public Company_newsDTO company_newsNextNews(int news_idx,int com_idx) {
+		Map map = new HashMap();
+		map.put("news_idx", news_idx);
+		map.put("com_idx", com_idx);
+		Company_newsDTO newsDto = company_newsDao.company_newsNextNews(map);
+		return newsDto;
 	}
 }
 

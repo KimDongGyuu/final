@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="map" style="width: 300px; height: 300px; margin-top: 10px;"></div>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94d3da3bc59e086f2502c483efb65662&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map'),
+        mapOption = {
+            center: new daum.maps.LatLng(37.537180, 127.005476),
+            level: 5
+        };
+
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    var geocoder = new daum.maps.services.Geocoder();
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537180, 127.005476),
+        map: map
+    });
+
+    // 페이지 로드시 바로 지도 띄우기
+    sample5_execDaumPostcode();
+
+    function sample5_execDaumPostcode() {
+        mapContainer.style.display = "block";
+        map.relayout();
+    }
+</script>
+
+</body>
+</html>

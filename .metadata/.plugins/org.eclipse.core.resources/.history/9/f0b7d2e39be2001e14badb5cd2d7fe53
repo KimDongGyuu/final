@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.ace.company_news">
-<insert id="company_newsWrite" parameterType="com.ace.company_news.model.Company_newsDTO">
-insert into company_news values(1,company_news_news_idx.nextval,#{news_writer},#{news_title},#{news_content},sysdate,0)
-</insert>
-  </mapper>

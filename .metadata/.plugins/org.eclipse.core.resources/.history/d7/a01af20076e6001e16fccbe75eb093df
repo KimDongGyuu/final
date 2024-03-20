@@ -1,0 +1,133 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/style.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#left {
+	width: 200px;
+	height: 1000px;
+	float: left;
+	border-right: 2px solid darkblue;
+	margin-left: 50px;
+}
+
+#right {
+	width: 900px;
+	height: 600px;
+	margin-left: 330px;
+}
+
+#bt {
+	width: 180px;
+	height: 40px;
+}
+#PNbt {
+	width: 75px;
+	height: 40px;
+}
+
+h3 {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<div>
+	<div id="left">
+		<button id="bt" type="button" class="btn btn-outline-primary"
+				onclick="location.href='company_event_Writeform.do';">글 작성</button>
+		<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a> <br><a href="fileUploadForm.do">파일업로드</a></div>
+	</div>
+
+		<div id="right">
+		
+			<div class="container">
+				<div class="mt-5 mb-2">
+					<span class="h4">임직원 경조사&gt;&gt;${eventDto.event_idx }번 게시글</span>&nbsp;
+					&nbsp;
+					<button id="PNbt" type="button" class="btn btn-outline-dark"
+						onclick="">이전글</button>
+					<button id="PNbt" type="button" class="btn btn-outline-dark"
+						onclick="">다음글</button>
+				</div>
+				
+				<table width="1000" cellspacing="0" class="table">
+					<tr align="center">
+						<th class="table-primary">번호</th>
+						<td>${eventDto.event_idx}</td>
+						<th class="table-primary">작성일</th>
+						<td>${eventDto.event_writedate }</td>
+						<th class="table-primary">작성자</th>
+						<td>${eventDto.event_writer }</td>
+					</tr>
+					<tr>
+						<th class="text-center table-primary">제목</th>
+						<td colspan="6">${eventDto.event_title }</td>
+					</tr>
+					<tr>
+						<th class="text-center table-primary">주소</th>
+						<td colspan="6">${eventDto.event_addr }</td>
+					</tr>
+					<tr height="400">
+						<td colspan="6" align="left" valign="top">${eventDto.event_content }</td>
+						<td>
+<input type="text" id="sample5_address" value="${eventDto.event_addr}"> 
+<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+<div id="map" style="width: 300px; height: 300px; margin-top: 10px;"></div>
+
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94d3da3bc59e086f2502c483efb65662&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map');
+    var mapOption = {
+        center: new daum.maps.LatLng(37.537187, 127.005476),
+        level: 5
+    };
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    var geocoder = new daum.maps.services.Geocoder();
+    var marker = new daum.maps.Marker({
+        map: map
+    });
+
+    function sample5_execDaumPostcode() {
+        var addr = document.getElementById("sample5_address").value;
+        geocoder.addressSearch(addr, function(results, status) {
+            if (status === daum.maps.services.Status.OK) {
+                var result = results[0];
+                var coords = new daum.maps.LatLng(result.y, result.x);
+                map.setCenter(coords);
+                marker.setPosition(coords);
+            }
+        });
+    }
+	window.alert(addr);
+    // 페이지 로드시 주소로 지도 표시
+    window.onload = sample5_execDaumPostcode;
+</script>
+
+
+						</td>
+					</tr>
+				</table>
+
+
+				<div class="d-flex justify-content-center">
+					<button id="bt" type="button" class="btn btn-outline-primary"
+						onclick="location.href='company_event_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
+					&nbsp; &nbsp;
+					<button id="bt" type="button" class="btn btn-outline-success"
+						onclick="">수정</button>
+					&nbsp; &nbsp;
+					<button id="bt" type="button" class="btn btn-outline-danger"
+						onclick="">삭제</button>
+				</div>
+			</div>
+		</div>
+
+</div>
+</body>
+</html>

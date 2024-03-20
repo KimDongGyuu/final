@@ -35,15 +35,15 @@
 	<div>
 		<div id="left">
 			<button id="bt" type="button" class="btn btn-outline-primary"
-				onclick="location.href='company_news_List.do';">목록</button>
+				onclick="location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
 			
 			
-			<div class="mt-3"><a href="company_news_List.do">회사소식</a> <br> 경조사</div>
+			<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a></div>
 			
 		</div>
 		
 		<form name="company_newsWrite" action="company_newsWrite.do" method="post">
-		
+		<input type="hidden" name="com_idx" value="${dto.getCom_idx()}">
 		<div id="right"> 
 		<div class="container">
 		
@@ -51,7 +51,7 @@
 		
 		<div class="mb-2 d-flex gap-2">
 		<input type="text" name="news_title" class="form-control" placeholder="제목" autocomplete="off" id="news_title">
-		<input type="text" name="news_writer" class="form-control" placeholder="작성자" id="news_writer">
+		<input type="text" name="news_writer" class="form-control" placeholder="작성자" id="news_writer" value="${dto.getName()}">
 		</div>
 		
 		

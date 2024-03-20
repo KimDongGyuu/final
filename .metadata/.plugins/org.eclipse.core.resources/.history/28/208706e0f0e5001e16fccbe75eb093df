@@ -1,0 +1,5 @@
+package com.ace.company_event.service;
+
+public class company_eventServiceImple implements company_eventService {
+
+}

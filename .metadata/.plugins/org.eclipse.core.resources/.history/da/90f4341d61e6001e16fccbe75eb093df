@@ -1,0 +1,42 @@
+package com.ace.company_event.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.ace.company_event.model.Company_eventDAO;
+import com.ace.company_event.model.Company_eventDTO;
+
+public class company_eventServiceImple implements company_eventService {
+
+	private Company_eventDAO Company_eventDao;
+
+	public Company_eventDAO getCompany_eventDao() {
+		return Company_eventDao;
+	}
+
+	public void setCompany_eventDao(Company_eventDAO company_eventDao) {
+		Company_eventDao = company_eventDao;
+	}
+	
+	@Override
+	public int company_eventWrite(Company_eventDTO eventDto) {
+		int count = Company_eventDao.company_eventWrite(eventDto);
+		return count;
+	}
+	
+	@Override
+	public List<Company_eventDTO> company_eventList(int com_idx) {
+		List<Company_eventDTO> eventList = Company_eventDao.company_eventList(com_idx);
+		return eventList;
+	}
+	
+	@Override
+	public Company_eventDTO company_eventContent(int com_idx, int event_idx) {
+		Map map = new HashMap();
+		map.put("com_idx", com_idx);
+		map.put("news_idx", event_idx);
+		Company_eventDTO eventDto = Company_eventDao.company_eventContent(map);
+		return eventDto;
+	}
+}

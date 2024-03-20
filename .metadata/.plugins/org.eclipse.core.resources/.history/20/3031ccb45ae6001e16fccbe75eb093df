@@ -1,0 +1,8 @@
+package com.ace.company_event.service;
+
+import com.ace.company_event.model.Company_eventDTO;
+
+public interface company_eventService {
+
+	public int company_eventWrite(Company_eventDTO eventDto);
+}

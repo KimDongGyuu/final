@@ -1,0 +1,169 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/style.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#left {
+	width: 200px;
+	height: 1000px;
+	float: left;
+	border-right: 2px solid darkblue;
+	margin-left: 50px;
+}
+
+#right {
+	width: 900px;
+	height: 600px;
+	margin-left: 330px;
+}
+
+#bt {
+	width: 180px;
+	height: 40px;
+}
+#PNbt {
+	width: 75px;
+	height: 40px;
+}
+
+h3 {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<div>
+	<div id="left">
+		<button id="bt" type="button" class="btn btn-outline-primary"
+				onclick="location.href='company_event_Writeform.do';">글 작성</button>
+		<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a> <br><a href="fileUploadForm.do">파일업로드</a></div>
+	</div>
+
+		<div id="right">
+		
+			<div class="container">
+				<div class="mt-5 mb-2">
+					<span class="h4">임직원 경조사&gt;&gt;${eventDto.event_idx }번 게시글</span>&nbsp;
+					&nbsp;
+					<button id="PNbt" type="button" class="btn btn-outline-dark"
+						onclick="">이전글</button>
+					<button id="PNbt" type="button" class="btn btn-outline-dark"
+						onclick="">다음글</button>
+				</div>
+				
+				<table width="1000" cellspacing="0" class="table">
+					<tr align="center">
+						<th class="table-primary">번호</th>
+						<td>${eventDto.event_idx}</td>
+						<th class="table-primary">작성일</th>
+						<td>${eventDto.event_writedate }</td>
+						<th class="table-primary">작성자</th>
+						<td>${eventDto.event_writer }</td>
+					</tr>
+					<tr>
+						<th class="text-center table-primary">제목</th>
+						<td colspan="6">${eventDto.event_title }</td>
+					</tr>
+					<tr>
+						<th class="text-center table-primary">주소</th>
+						<td colspan="6">${eventDto.event_addr }</td>
+					</tr>
+					<tr height="400">
+						<td colspan="6" align="left" valign="top">${eventDto.event_content }</td>
+						<td>
+					<div>
+					<input type="text" id="sample5_address" placeholder="주소"> <input
+						type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+					<div id="map"
+						style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
+
+					<script
+						src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+					<script
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94d3da3bc59e086f2502c483efb65662&libraries=services"></script>
+					<script>
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+						mapOption = {
+							center : new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+							level : 5
+						// 지도의 확대 레벨
+						};
+
+						//지도를 미리 생성
+						var map = new daum.maps.Map(mapContainer, mapOption);
+						//주소-좌표 변환 객체를 생성
+						var geocoder = new daum.maps.services.Geocoder();
+						//마커를 미리 생성
+						var marker = new daum.maps.Marker({
+							position : new daum.maps.LatLng(37.537187,
+									127.005476),
+							map : map
+						});
+
+						function sample5_execDaumPostcode() {
+							new daum.Postcode(
+									{
+										oncomplete : function(data) {
+											var addr = data.address; // 최종 주소 변수
+
+											// 주소 정보를 해당 필드에 넣는다.
+											document
+													.getElementById("sample5_address").value = addr;
+											// 주소로 상세 정보를 검색
+											geocoder
+													.addressSearch(
+															data.address,
+															function(results,
+																	status) {
+																// 정상적으로 검색이 완료됐으면
+																if (status === daum.maps.services.Status.OK) {
+
+																	var result = results[0]; //첫번째 결과의 값을 활용
+
+																	// 해당 주소에 대한 좌표를 받아서
+																	var coords = new daum.maps.LatLng(
+																			result.y,
+																			result.x);
+																	// 지도를 보여준다.
+																	mapContainer.style.display = "block";
+																	map
+																			.relayout();
+																	// 지도 중심을 변경한다.
+																	map
+																			.setCenter(coords);
+																	// 마커를 결과값으로 받은 위치로 옮긴다.
+																	marker
+																			.setPosition(coords)
+																}
+															});
+										}
+									}).open();
+						}
+					</script>
+				</div>
+						</td>
+					</tr>
+				</table>
+
+
+				<div class="d-flex justify-content-center">
+					<button id="bt" type="button" class="btn btn-outline-primary"
+						onclick="location.href='company_event_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
+					&nbsp; &nbsp;
+					<button id="bt" type="button" class="btn btn-outline-success"
+						onclick="">수정</button>
+					&nbsp; &nbsp;
+					<button id="bt" type="button" class="btn btn-outline-danger"
+						onclick="">삭제</button>
+				</div>
+			</div>
+		</div>
+
+</div>
+</body>
+</html>

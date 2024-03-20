@@ -1,0 +1,5 @@
+package com.ace.company_event.model;
+
+public class Company_eventDTO {
+
+}

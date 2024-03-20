@@ -41,16 +41,19 @@ h3 {
 		<div id="left">
 			<button id="bt" type="button" class="btn btn-outline-primary"
 				onclick="location.href='company_news_Writeform.do';">글 작성</button>
-<div class="mt-3"><a href="company_news_List.do">회사소식</a> <br> 경조사 <br><a href="fileUploadForm.do">파일업로드</a></div>
+<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a> <br><a href="fileUploadForm.do">파일업로드</a></div>
 		</div>
 		<div id="right">
 		<div class="mt-5 mb-2"><span class="h4">게시판 &gt;&gt; 회사소식 &gt;&gt; 검색결과</span></div>
 		
 <div class="mt-2 d-flex gap-2 justify-content-end">
-    <form action="company_newsSearch.do">
-        <input type="text" id="searchKeyword" name="keyword" placeholder="검색어를 입력하세요." style="width:70%; height: 35px;">
+
+   <form action="company_newsSearch.do">
+   <input type="hidden" name="com_idx" value="${dto.getCom_idx()}">
+        <input type="text" id="searchKeyword" name="keyword" placeholder="검색어를 입력하세요." value="${keyword }" style="width:70%; height: 35px;">
         <button id="Sbt" type="submit" class="btn btn btn-primary">검색</button>
-    </form>
+   </form>
+    
 </div>
 			<table width="1000" cellspacing="0" class="table table-hover">
 				<thead>
@@ -70,17 +73,18 @@ h3 {
 						</tr>
 					</c:if>
 
-					<c:forEach var="dto" items="${lists }">
+					<c:forEach var="newsDto" items="${lists }">
 						<tr class="text-center">
-							<th scope="row">${dto.news_idx }</th>
+							<th scope="row">${newsDto.news_idx }</th>
 							<c:url var="company_newsContentUrl"
 								value="company_news_Content.do">
-								<c:param name="news_idx">${dto.news_idx }</c:param>
+								<c:param name="news_idx">${newsDto.news_idx }</c:param>
+								<c:param name="com_idx">${dto.getCom_idx()}</c:param>
 							</c:url>
-							<td><a href="${company_newsContentUrl }">${dto.news_title }</a></td>
-							<td>${dto.news_writer }</td>
-							<td>${dto.news_writedate }</td>
-							<td>${dto.news_readnum }</td>
+							<td><a href="${company_newsContentUrl }">${newsDto.news_title }</a></td>
+							<td>${newsDto.news_writer }</td>
+							<td>${newsDto.news_writedate }</td>
+							<td>${newsDto.news_readnum }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

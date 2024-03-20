@@ -34,29 +34,29 @@
 	<div>
 		<div id="left">
 			<button id="bt" type="button" class="btn btn-outline-primary"
-				onclick="location.href='company_news_List.do';">목록</button>
+				onclick="location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
 			
 			
-			<div class="mt-3"><a href="company_news_List.do">회사소식</a> <br> 경조사</div>
+			<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a></div>
 			
 		</div>
 		
 		<form name="company_newsUpdate" action="company_newsUpdate.do" method="post">
-		<input type="hidden" name="news_idx" value="${dto.news_idx }">
+		<input type="hidden" name="news_idx" value="${newsDto.news_idx }">
 		<div id="right"> 
 		<div class="container">
 		
-		<div class="mt-5 mb-2"><span class="h4">회사소식 &gt;&gt; ${dto.news_idx}번 게시글 수정</span></div>
+		<div class="mt-5 mb-2"><span class="h4">회사소식 &gt;&gt; ${newsDto.news_idx}번 게시글 수정</span></div>
 		
 		<div class="mb-2 d-flex gap-2">
-		<input type="text" name="news_title" class="form-control" value="${dto.news_title }" autocomplete="off" id="news_title">
-		<input type="text" name="news_writer" class="form-control" value="${dto.news_writer }" id="news_writer">
+		<input type="text" name="news_title" class="form-control" value="${newsDto.news_title }" autocomplete="off" id="news_title">
+		<input type="text" name="news_writer" class="form-control" value="${newsDto.news_writer }" id="news_writer">
 		
 		</div>
 		
 		
 		 <div>
-		 	<textarea id="summernote" name="news_content">${dto.news_content }</textarea>
+		 	<textarea id="summernote" name="news_content">${newsDto.news_content }</textarea>
 		 </div>	
 		 
 		 <div class="mt-2 d-flex gap-2 justify-content-center">

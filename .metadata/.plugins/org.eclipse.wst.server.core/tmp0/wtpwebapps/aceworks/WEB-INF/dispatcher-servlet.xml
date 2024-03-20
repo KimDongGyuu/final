@@ -17,6 +17,9 @@
    <bean id="company_newsService" class="com.ace.company_news.service.company_newsServiceImple">
    <property name="company_newsDao" ref="company_newsDao"></property>
    </bean>
+   <bean id="company_eventService" class="com.ace.company_event.service.company_eventServiceImple">
+   <property name="company_eventDao" ref="company_eventDao"></property>
+   </bean>
   
    
    <!-- viewResolvers -->

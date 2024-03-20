@@ -8,8 +8,7 @@
 </head>
 <body>
 <ul>
-<li><a href="company_news_List.do">회사소식</a></li>
-<li><a href="fileUploadForm.do">파일업로드</a></li>
+<li><a href="login.do">로그인</a></li>
 </ul>
 </body>
 </html>
