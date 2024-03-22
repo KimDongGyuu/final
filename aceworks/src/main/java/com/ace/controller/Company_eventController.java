@@ -104,6 +104,25 @@ public class Company_eventController {
 		return mav;
 	}
 	
+	@RequestMapping("/company_event_SearchContent")
+	public ModelAndView company_eventSearchContnet(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx") Integer com_idx,@RequestParam("eventKeyword") String eventKeyword) {
+		Company_eventDTO eventDto = company_eventService.company_eventSearchContnet(event_idx, com_idx);
+		Company_eventDTO SearchPreviouseventDto = company_eventService.company_eventSearchPreviousEvent(event_idx, com_idx,eventKeyword);
+		int result = company_eventService.company_eventReadnumUpdate(event_idx);
+		
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("SearchPreviouseventDto",SearchPreviouseventDto);
+		mav.addObject("eventDto",eventDto);
+		mav.addObject("com_idx",com_idx);
+		mav.addObject("event_idx",event_idx);
+		mav.addObject("result",result);
+		mav.setViewName("company_event/company_event_SearchContent");
+		return mav;
+	}
+	
+
+	
 	@RequestMapping("/company_eventSearch")
 	public ModelAndView company_eventSearch(@RequestParam("com_idx")int com_idx,@RequestParam("eventKeyword")String eventKeyword,@RequestParam(value = "cp", defaultValue = "1") int cp) {
 		int totalCnt = company_eventService.searchGetEventTotalCnt(eventKeyword, com_idx);
@@ -151,27 +170,27 @@ public class Company_eventController {
 		return mav;
 	}
 	
-	@RequestMapping("/company_event_PreviousEvent")
-	public ModelAndView comcompany_eventPreviousEvent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx")Integer com_idx) {
-		Company_eventDTO eventDto = company_eventService.company_eventPreviousEvent(event_idx, com_idx);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("eventDto",eventDto);
-		mav.addObject("event_idx",event_idx);
-		mav.addObject("com_idx",com_idx);
-		mav.setViewName("company_event/company_event_PreviousEvent");
-		return mav;
-	}
-	
-	@RequestMapping("/company_event_NextEvent")
-	public ModelAndView company_eventNextEvent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx")Integer com_idx) {
-		Company_eventDTO eventDto = company_eventService.company_eventNextEvent(event_idx, com_idx);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("eventDto",eventDto);
-		mav.addObject("event_idx",event_idx);
-		mav.addObject("com_idx",com_idx);
-		mav.setViewName("company_event/company_event_NextEvent");
-		return mav;
-	}
+//	@RequestMapping("/company_event_PreviousEvent")
+//	public ModelAndView comcompany_eventPreviousEvent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx")Integer com_idx) {
+//		Company_eventDTO eventDto = company_eventService.company_eventPreviousEvent(event_idx, com_idx);
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("eventDto",eventDto);
+//		mav.addObject("event_idx",event_idx);
+//		mav.addObject("com_idx",com_idx);
+//		mav.setViewName("company_event/company_event_PreviousEvent");
+//		return mav;
+//	}
+//	
+//	@RequestMapping("/company_event_NextEvent")
+//	public ModelAndView company_eventNextEvent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx")Integer com_idx) {
+//		Company_eventDTO eventDto = company_eventService.company_eventNextEvent(event_idx, com_idx);
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("eventDto",eventDto);
+//		mav.addObject("event_idx",event_idx);
+//		mav.addObject("com_idx",com_idx);
+//		mav.setViewName("company_event/company_event_NextEvent");
+//		return mav;
+//	}
 }
 
 

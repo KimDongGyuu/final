@@ -17,16 +17,6 @@
     	var url = 'company_news_UpdateForm.do?news_idx=' + news_idx;
         window.location.href = url;
     }
-    
-    function previousNews(news_idx,com_idx) {
-		var url = 'company_news_PreviousNews.do?news_idx=' + news_idx+'&com_idx='+com_idx;
-		window.location.href = url;
-	}
-    
-    function nextNews(news_idx,com_idx) {
-		var url = 'company_news_NextNews.do?news_idx=' + news_idx+'&com_idx='+com_idx;
-		window.location.href = url;
-	}
 </script>
 <style>
 #left {
@@ -83,11 +73,6 @@ h3 {
 			<div class="container">
 				<div class="mt-5 mb-2">
 					<span class="h4">회사소식&gt;&gt;${newsDto.news_idx }번 게시글</span>&nbsp;
-					&nbsp;
-					<button id="PNbt" type="button" class="btn btn-outline-dark"
-						onclick="previousNews(${newsDto.news_idx},${dto.getCom_idx()});">이전글</button>
-					<button id="PNbt" type="button" class="btn btn-outline-dark"
-						onclick="nextNews(${newsDto.news_idx},${dto.getCom_idx()});">다음글</button>
 				</div>
 				
 				<table width="1000" cellspacing="0" class="table">
@@ -105,6 +90,42 @@ h3 {
 					</tr>
 					<tr height="400">
 						<td colspan="6" align="left" valign="top">${newsDto.news_content }</td>
+					</tr>
+				</table>
+				
+				<table width="1000" cellspacing="0" class="table table-hover">
+					<tr>
+						<c:choose>
+						    <c:when test="${empty NextnewsDto.news_title}">
+						        <td>다음글이 없습니다.</td>
+						    </c:when>
+						    <c:otherwise>
+						        <td>
+						            <c:url var="company_newsContentUrl" value="company_news_Content.do">
+						                <c:param name="news_idx">${NextnewsDto.news_idx }</c:param>
+						                <c:param name="com_idx">${dto.getCom_idx()}</c:param>
+						            </c:url>
+						            <a href="${company_newsContentUrl}">다음글 : ${NextnewsDto.news_title}</a>
+						        </td>
+						    </c:otherwise>
+						</c:choose>
+					</tr>
+					
+					<tr>
+						<c:choose>
+						    <c:when test="${empty PreviousnewsDto.news_title}">
+						        <td>이전글이 없습니다.</td>
+						    </c:when>
+						    <c:otherwise>
+						        <td>
+						            <c:url var="company_newsContentUrll" value="company_news_Content.do">
+						                <c:param name="news_idx">${PreviousnewsDto.news_idx}</c:param>
+						                <c:param name="com_idx">${dto.getCom_idx()}</c:param>
+						            </c:url>
+						            <a href="${company_newsContentUrll}">이전글 : ${PreviousnewsDto.news_title}</a>
+						        </td>
+						    </c:otherwise>
+						</c:choose>
 					</tr>
 				</table>
 				

@@ -56,6 +56,14 @@ public class Company_eventDAOImple implements Company_eventDAO {
 	}
 	
 	@Override
+	public Company_eventDTO company_eventSearchContnet(Map map) {
+		Company_eventDTO eventDto = sqlmap.selectOne("company_eventSearchContnet",map);
+		return eventDto;
+	}
+	
+
+	
+	@Override
 	public List<Company_eventDTO> company_eventSearch(Map map) {
 		List<Company_eventDTO> evenList = sqlmap.selectList("company_eventSearch",map);
 		return evenList;
@@ -88,6 +96,12 @@ public class Company_eventDAOImple implements Company_eventDAO {
 	@Override
 	public Company_eventDTO company_eventPreviousEvent(Map map) {
 		Company_eventDTO eventDto = sqlmap.selectOne("company_eventPreviousEvent",map);
+		return eventDto;
+	}
+	
+	@Override
+	public Company_eventDTO company_eventSearchPreviousEvent(Map map) {
+		Company_eventDTO eventDto = sqlmap.selectOne("company_eventSearchPreviousEvent",map);
 		return eventDto;
 	}
 	

@@ -29,8 +29,14 @@ where rnum <![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
 select * from company_event where event_idx=#{event_idx} and com_idx=#{com_idx}
 </select>
 
+<select id="company_eventSearchContnet" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
+select * from company_event where event_idx=#{event_idx} and com_idx=#{com_idx}
+</select>
+
+
+
 <select id="eventTotalCnt" parameterType="Integer" resultType="Integer">
-select count(*) from company_event where com_idx=#{com_idx}
+select count(*) from company_event where com_idx=#{com_idx} and comment_level=0
 </select>
 
 <select id="company_eventSearch" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
@@ -60,6 +66,11 @@ update company_event set event_title=#{event_title},event_writer=#{event_writer}
 select * from (select * from company_event where com_idx = #{com_idx} and comment_ref = (select max(comment_ref) from company_event where com_idx = #{com_idx} and comment_ref <![CDATA[<]]> (select comment_ref from company_event where event_idx = #{event_idx}))
 and comment_level = 0)
 where rownum = 1
+</select>
+
+<select id="company_eventSearchPreviousEvent" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
+select * from (select * from company_event where com_idx = #{com_idx} and comment_ref = (select max(comment_ref) from company_event where com_idx = #{com_idx} and event_title like '%' || #{eventKeyword} || '%' and comment_ref <![CDATA[<]]> (select comment_ref from company_event where event_idx = #{event_idx}))
+and comment_level = 0)where rownum = 1
 </select>
 
 <select id="company_eventNextEvent" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">

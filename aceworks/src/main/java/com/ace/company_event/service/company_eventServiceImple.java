@@ -76,6 +76,18 @@ public class company_eventServiceImple implements company_eventService {
 	}
 	
 	@Override
+	public Company_eventDTO company_eventSearchContnet(int event_idx, int com_idx) {
+		Map map = new HashMap();
+		map.put("com_idx", com_idx);
+		map.put("event_idx", event_idx);
+		Company_eventDTO eventDto = Company_eventDao.company_eventSearchContnet(map);
+		
+		return eventDto;
+	}
+	
+
+	
+	@Override
 	public List<Company_eventDTO> company_eventSearch(int com_idx, String eventKeyword, int cp, int ls) {
 		int start = (cp-1)*ls+1;
 		int end = cp*ls;
@@ -124,6 +136,16 @@ public class company_eventServiceImple implements company_eventService {
 		map.put("com_idx", com_idx);
 		Company_eventDTO eventDto = Company_eventDao.company_eventPreviousEvent(map);
 		
+		return eventDto;
+	}
+	
+	@Override
+	public Company_eventDTO company_eventSearchPreviousEvent(int event_idx, int com_idx, String eventKeyword) {
+		Map map = new HashMap();
+		map.put("event_idx", event_idx);
+		map.put("com_idx", com_idx);
+		map.put("eventKeyword", eventKeyword);
+		Company_eventDTO eventDto = Company_eventDao.company_eventSearchPreviousEvent(map);
 		return eventDto;
 	}
 	

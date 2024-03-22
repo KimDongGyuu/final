@@ -16,14 +16,6 @@ function updateEvent(event_idx) {
 	var url = 'company_event_UpdateForm.do?event_idx=' + event_idx;
     window.location.href = url;
 }
-function previousEvent(event_idx,com_idx) {
-	var url = 'company_event_PreviousEvent.do?event_idx=' + event_idx+'&com_idx='+com_idx;
-	window.location.href = url;
-}
-function nextEvent(event_idx,com_idx) {
-	var url = 'company_event_NextEvent.do?event_idx=' + event_idx+'&com_idx='+com_idx;
-	window.location.href = url;
-}
 </script>
 <style>
 #left {
@@ -85,11 +77,7 @@ h3 {
 			<div class="container">
 				<div class="mt-5 mb-2">
 					<span class="h4">임직원 경조사&gt;&gt;${eventDto.event_idx }번 게시글</span>&nbsp;
-					&nbsp;
-					<button id="PNbt" type="button" class="btn btn-outline-dark"
-						onclick="previousEvent(${eventDto.event_idx},${dto.getCom_idx()});">이전글</button>
-					<button id="PNbt" type="button" class="btn btn-outline-dark"
-						onclick="nextEvent(${eventDto.event_idx},${dto.getCom_idx()});">다음글</button>
+
 				</div>
 				
 				<table width="1000" cellspacing="0" class="table">
@@ -167,19 +155,45 @@ h3 {
 					</td>
 					</tr>
 				</table>
-					<c:url var="company_eventContentUrl" value="company_event_Content.do">
-					<c:param name="event_idx">${nexteventDto.event_idx }</c:param>
-					<c:param name="com_idx">${dto.getCom_idx()}</c:param>
-					</c:url>
-				<h5><a href="${company_eventContentUrl }">다음글 :${nexteventDto.event_title }</a></h5>
-				
-					<c:url var="company_eventContentUrll" value="company_event_Content.do">
-					<c:param name="event_idx">${previouseventDto.event_idx }</c:param>
-					<c:param name="com_idx">${dto.getCom_idx()}</c:param>
-					</c:url>
-				<h5><a href="${company_eventContentUrll }">이전글 :${previouseventDto.event_title }</a></h5>
 
-			
+				<table width="1000" cellspacing="0" class="table table-hover">
+					<tr>
+						<c:choose>
+						    <c:when test="${empty nexteventDto.event_title}">
+						        <td>다음글이 없습니다.</td>
+						    </c:when>
+						    <c:otherwise>
+						        <td>
+						            <c:url var="company_eventContentUrl" value="company_event_Content.do">
+						                <c:param name="event_idx">${nexteventDto.event_idx }</c:param>
+						                <c:param name="com_idx">${dto.getCom_idx()}</c:param>
+						            </c:url>
+						            <a href="${company_eventContentUrl}">다음글 : ${nexteventDto.event_title}</a>
+						        </td>
+						    </c:otherwise>
+						</c:choose>
+					</tr>
+
+					<tr>
+						<c:choose>
+						    <c:when test="${empty previouseventDto.event_title}">
+						        <td>이전글이 없습니다.</td>
+						    </c:when>
+						    <c:otherwise>
+						        <td>
+						            <c:url var="company_eventContentUrll" value="company_event_Content.do">
+						                <c:param name="event_idx">${previouseventDto.event_idx}</c:param>
+						                <c:param name="com_idx">${dto.getCom_idx()}</c:param>
+						            </c:url>
+						            <a href="${company_eventContentUrll}">이전글 : ${previouseventDto.event_title}</a>
+						        </td>
+						    </c:otherwise>
+						</c:choose>
+					</tr>
+				</table>
+
+
+
 
 <script src="js/httpRequest.js"></script>		
 <form>

@@ -77,12 +77,14 @@ h3 {
 					<tr class="text-center">
 					<th scope="row">${eventDto.event_idx }</th>
 					
-					<c:url var="company_eventContentUrl" value="company_event_Content.do">
+					<c:url var="company_eventSearchContentUrl" value="company_event_SearchContent.do">
+					
 					<c:param name="event_idx">${eventDto.event_idx }</c:param>
 					<c:param name="com_idx">${dto.getCom_idx()}</c:param>
+					<c:param name="eventKeyword">${eventKeyword}</c:param>
 					</c:url>					
 					
-					<td><a href="${company_eventContentUrl }">${eventDto.event_title }</a></td>
+					<td><a href="${company_eventSearchContentUrl }">${eventDto.event_title }</a></td>
 					<td>${eventDto.event_writer }</td>
 					<td>${eventDto.event_writedate }</td>
 					<td>${eventDto.event_readnum }</td>
