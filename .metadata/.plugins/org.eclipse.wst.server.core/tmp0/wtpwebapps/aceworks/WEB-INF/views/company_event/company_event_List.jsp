@@ -39,8 +39,20 @@ h3 {
 <body>
 <div>
 <div id="left">
-			<button id="bt" type="button" class="btn btn-outline-primary"
-				onclick="location.href='company_event_Writeform.do';">글 작성</button>
+<c:if test="${dto.rank_num == 2 || dto.rank_num == 1 || dto.rank_num == 3}">
+    <button id="bt" type="button" class="btn btn-outline-primary" onclick="writeEvent()">글 작성</button>
+</c:if>
+
+<script>
+    function writeEvent() {
+        <c:if test="${dto.rank_num == 3}">
+            window.alert('글을 작성할 권한이 없습니다.');
+        </c:if>
+        <c:if test="${dto.rank_num == 2 || dto.rank_num == 1}">
+            location.href = 'company_event_Writeform.do';
+        </c:if>
+    }
+</script>
 <div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a> <br><a href="fileUploadForm.do">파일업로드</a></div>
 		</div>
 		<div id="right">

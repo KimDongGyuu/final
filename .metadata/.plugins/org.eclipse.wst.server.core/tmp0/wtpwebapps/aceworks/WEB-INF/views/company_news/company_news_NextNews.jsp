@@ -60,8 +60,20 @@ h3 {
 <body>
 	<div>
 		<div id="left">
-			<button id="bt" type="button" class="btn btn-outline-primary"
-				onclick="location.href='company_news_Writeform.do';">글 작성</button>
+		<c:if test="${dto.rank_num == 2 || dto.rank_num == 1 || dto.rank_num == 3}">
+		    <button id="bt" type="button" class="btn btn-outline-primary" onclick="writeNews()">글 작성</button>
+		</c:if>
+		
+		<script>
+		    function writeNews() {
+		        <c:if test="${dto.rank_num == 3}">
+		            window.alert('글을 작성할 권한이 없습니다.');
+		        </c:if>
+		        <c:if test="${dto.rank_num == 2 || dto.rank_num == 1}">
+		            location.href = 'company_news_Writeform.do';
+		        </c:if>
+		    }
+		</script>
 			<div class="mt-3">
 				<a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a>
 			</div>
@@ -94,14 +106,26 @@ h3 {
 					</tr>
 				</table>
 
-				<div class="d-flex justify-content-center">
-					<button id="bt" type="button" class="btn btn-outline-primary"
-						onclick="location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
-					&nbsp; &nbsp;
-					<button id="bt" type="button" class="btn btn-outline-success" onclick="updateNews(${newsDto.news_idx});">수정</button>
-					&nbsp; &nbsp;
-					<button id="bt" type="button" class="btn btn-outline-danger" onclick="deleteNews(${newsDto.news_idx});">삭제</button>
-				</div>
+				<c:if test="${dto.rank_num == 2 || dto.rank_num == 1}">
+					<div class="d-flex justify-content-center">
+						<button id="bt" type="button" class="btn btn-outline-primary"
+							onclick="location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
+						&nbsp; &nbsp;
+						<button id="bt" type="button" class="btn btn-outline-success"
+							onclick="updateNews(${newsDto.news_idx});">수정</button>
+						&nbsp; &nbsp;
+						<button id="bt" type="button" class="btn btn-outline-danger"
+							onclick="deleteNews(${newsDto.news_idx});">삭제</button>
+					</div>
+				</c:if>
+				
+				<c:if test="${dto.rank_num == 3}">
+					<div class="d-flex justify-content-center">
+						<button id="bt" type="button" class="btn btn-outline-primary"
+							onclick="location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
+	
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</div>

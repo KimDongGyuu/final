@@ -23,6 +23,7 @@
   
    
    <!-- viewResolvers -->
+   <bean id="yongJson" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean>
    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
       <property name="order" value="0"></property>
    </bean>

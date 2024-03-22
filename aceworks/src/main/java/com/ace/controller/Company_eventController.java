@@ -17,7 +17,7 @@ public class Company_eventController {
 	@Autowired
 	private company_eventService company_eventService; 
 	
-	@RequestMapping("/company_event_List.do")
+	@RequestMapping("/company_event_List")
 	public ModelAndView company_eventList(@RequestParam("com_idx")int com_idx,@RequestParam(value = "cp", defaultValue = "1") int cp) {
 		
 		int totalCnt = company_eventService.getEventTotalCnt(com_idx);
@@ -35,30 +35,54 @@ public class Company_eventController {
 		return mav;
 	}
 	
-	@RequestMapping("/company_event_Writeform.do")
+	@RequestMapping("/company_eventReWriteList")
+	public ModelAndView company_eventReWriteList(@RequestParam("com_idx")int com_idx,@RequestParam("comment_ref")int comment_ref) {
+		List<Company_eventDTO> list = company_eventService.company_eventReWriteList(com_idx, comment_ref);
+		ModelAndView mav =new ModelAndView();
+		mav.addObject("com_idx",com_idx);
+		mav.addObject("comment_ref",comment_ref);
+		mav.addObject("list",list);
+		mav.setViewName("yongJson");
+		return mav;
+	}
+	
+	@RequestMapping("/company_event_Writeform")
 	public String company_event_Writeform() {
 		return "company_event/company_event_WriteForm";
 	}
+
 	
-	@RequestMapping("/company_eventWrite.do")
+	@RequestMapping("/company_eventWrite")
 	public ModelAndView company_eventWrite(Company_eventDTO eventDto) {
 		int result = company_eventService.company_eventWrite(eventDto);
+
 		String msg = result > 0? "게시물이 등록 되었습니다.":"게시물 등록에 실패 하였습니다.";
 		ModelAndView mav = new ModelAndView();
-		
+
 		mav.addObject("msg", msg);
 		mav.setViewName("company_event/company_eventMsg");
+		return mav;
+	}
+	
+	@RequestMapping("/company_eventReWrite")
+	public ModelAndView company_eventReWrite(Company_eventDTO eventDto) {
+		int result = company_eventService.company_eventReWrite(eventDto);
+		String msg = result > 0? "댓글이 등록 되었습니다.":"댓글 등록에 실패 하였습니다.";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.setViewName("yongJson");
 		return mav;
 	}
 	
 	@RequestMapping("/company_event_Content")
 	public ModelAndView company_eventContent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx") Integer com_idx) {
 		Company_eventDTO eventDto = company_eventService.company_eventContent(event_idx,com_idx);
-		
+		int result = company_eventService.company_eventReadnumUpdate(event_idx);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventDto",eventDto);
 		mav.addObject("com_idx",com_idx);
 		mav.addObject("event_idx",event_idx);
+		mav.addObject("result",result);
 		mav.setViewName("company_event/company_event_Content");
 		return mav;
 	}
@@ -99,7 +123,7 @@ public class Company_eventController {
 		return mav;
 	}
 	
-	@RequestMapping("/company_eventUpdate.do")
+	@RequestMapping("/company_eventUpdate")
 	public ModelAndView company_eventUpdate(Company_eventDTO eventDto) {
 		int result = company_eventService.company_eventUpdate(eventDto);
 		System.out.println(result);
@@ -110,7 +134,7 @@ public class Company_eventController {
 		return mav;
 	}
 	
-	@RequestMapping("/company_event_PreviousEvent.do")
+	@RequestMapping("/company_event_PreviousEvent")
 	public ModelAndView comcompany_eventPreviousEvent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx")Integer com_idx) {
 		Company_eventDTO eventDto = company_eventService.company_eventPreviousEvent(event_idx, com_idx);
 		ModelAndView mav = new ModelAndView();

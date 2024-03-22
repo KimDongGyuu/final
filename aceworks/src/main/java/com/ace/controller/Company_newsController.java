@@ -22,7 +22,7 @@ public class Company_newsController {
 @Autowired
 private company_newsService company_newsService; 
 	
-	@RequestMapping("/company_news_List.do")
+	@RequestMapping("/company_news_List")
 	public ModelAndView company_newsList(@RequestParam("com_idx")int com_idx,@RequestParam(value = "cp", defaultValue = "1") int cp) {
 		
 		int totalCnt = company_newsService.getTotalCnt(com_idx);
@@ -40,7 +40,7 @@ private company_newsService company_newsService;
 		return mav;
 	}
 	
-	@RequestMapping("/company_newsSearch.do")
+	@RequestMapping("/company_newsSearch")
 	public ModelAndView company_newsSearch(@RequestParam("com_idx")int com_idx,@RequestParam("keyword")String keyword,@RequestParam(value = "cp", defaultValue = "1") int cp) {
 		
 		int totalCnt = company_newsService.SearchGetTotalCnt(keyword,com_idx);
@@ -61,12 +61,12 @@ private company_newsService company_newsService;
 		return mav;
 	}
 	
-	@RequestMapping(value="/company_news_Writeform.do" , method = RequestMethod.GET)
+	@RequestMapping(value="/company_news_Writeform" , method = RequestMethod.GET)
 	public String company_news_Writeform() {
 		return "company_news/company_news_Writeform";
 	}
 	
-	@RequestMapping("/company_newsWrite.do")
+	@RequestMapping("/company_newsWrite")
 	public ModelAndView company_newsWrite(Company_newsDTO newsDto) {
 
 		int result = company_newsService.company_newsWrite(newsDto);
@@ -78,7 +78,7 @@ private company_newsService company_newsService;
 		mav.setViewName("company_news/company_newsMsg");
 		return mav;
 	}
-	@RequestMapping("/company_news_Content.do")
+	@RequestMapping("/company_news_Content")
 	public ModelAndView company_newsContent(@RequestParam("news_idx") Integer news_idx,@RequestParam("com_idx") Integer com_idx) {
 		Company_newsDTO newsDto = company_newsService.company_newsContent(news_idx,com_idx);
 		
@@ -93,7 +93,7 @@ private company_newsService company_newsService;
 		return mav;
 	}
 	
-	@RequestMapping("/company_news_Delete.do")
+	@RequestMapping("/company_news_Delete")
 	public ModelAndView company_newsDelete(@RequestParam("news_idx")int news_idx) {
 		int result = company_newsService.company_newsDelete(news_idx);
 		String msg = result > 0? "게시물이 삭제 되었습니다.":"게시물 삭제에 실패 하였습니다.";
@@ -103,7 +103,7 @@ private company_newsService company_newsService;
 		return mav;
 	}
 	
-	@RequestMapping("/company_news_UpdateForm.do")
+	@RequestMapping("/company_news_UpdateForm")
 	public ModelAndView company_newsUpdateForm(@RequestParam("news_idx")int news_idx) {
 		Company_newsDTO newsDto = company_newsService.company_newsUpdateForm(news_idx);
 		ModelAndView mav = new ModelAndView();
@@ -112,7 +112,7 @@ private company_newsService company_newsService;
 		return mav;
 	}
 	
-	@RequestMapping("/company_newsUpdate.do")
+	@RequestMapping("/company_newsUpdate")
 	public ModelAndView companu_newsUpdate(Company_newsDTO newsDto) {
 	int result = company_newsService.company_newsUpdate(newsDto);
 	String msg = result>0?"게시글이 수정되었습니다.":"게시글 수정에 실패 하였습니다.";
@@ -123,7 +123,7 @@ private company_newsService company_newsService;
 	return mav;
 	}
 	
-	@RequestMapping("/company_news_PreviousNews.do")
+	@RequestMapping("/company_news_PreviousNews")
 	public ModelAndView company_newsPreviousNews(@RequestParam("news_idx") Integer news_idx,@RequestParam("com_idx") Integer com_idx) {
 		Company_newsDTO newsDto = company_newsService.company_newsPreviousNews(news_idx,com_idx);
 		
@@ -135,7 +135,7 @@ private company_newsService company_newsService;
 		return mav;
 	}
 	
-	@RequestMapping("/company_news_NextNews.do")
+	@RequestMapping("/company_news_NextNews")
 	public ModelAndView company_newsNext(@RequestParam("news_idx") Integer news_idx,@RequestParam("com_idx") Integer com_idx) {
 		Company_newsDTO newsDto = company_newsService.company_newsNextNews(news_idx,com_idx);
 		ModelAndView mav = new ModelAndView();
@@ -146,12 +146,12 @@ private company_newsService company_newsService;
 		return mav;
 	}
 	
-	@RequestMapping("/fileUploadForm.do")
+	@RequestMapping("/fileUploadForm")
 	public String fileUploadForm() {
 		return "company_news/fileUploadForm";
 	}
 	
-	@RequestMapping("/fileUpload.do")
+	@RequestMapping("/fileUpload")
 	public String fileUpload(FileUploadDTO dto) {
 		copyInto(dto.getNews_file());
 		return "company_news/fileOk";

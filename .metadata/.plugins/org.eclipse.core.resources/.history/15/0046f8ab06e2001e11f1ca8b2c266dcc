@@ -1,5 +1,0 @@
-package com.ace.company_news.service;
-
-public interface company_newsService {
-
-}
