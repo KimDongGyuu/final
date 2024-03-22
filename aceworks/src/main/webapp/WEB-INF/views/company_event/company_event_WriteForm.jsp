@@ -113,7 +113,7 @@ function sb(event) {
 		
 		<input type="hidden" name="com_idx" value="${dto.getCom_idx()}">
 		<input type="hidden" id="event_addr" name="event_addr">
-		
+	
 		<div id="right"> 
 		<div class="container">
 		

@@ -57,12 +57,14 @@ update company_event set event_title=#{event_title},event_writer=#{event_writer}
 </update>
 
 <select id="company_eventPreviousEvent" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
-select * from (select * from company_event where com_idx=#{com_idx} and event_writedate <![CDATA[<]]> (select event_writedate from company_event where event_idx=#{event_idx})order by event_writedate desc)
+select * from (select * from company_event where com_idx = #{com_idx} and comment_ref = (select max(comment_ref) from company_event where com_idx = #{com_idx} and comment_ref <![CDATA[<]]> (select comment_ref from company_event where event_idx = #{event_idx}))
+and comment_level = 0)
 where rownum = 1
 </select>
 
 <select id="company_eventNextEvent" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
-select * from (select * from company_event where com_idx=#{com_idx} and event_writedate <![CDATA[>]]> (select event_writedate from company_event where event_idx=#{event_idx})order by event_writedate asc)
+select * from (select * from company_event where com_idx = #{com_idx} and comment_ref = (select min(comment_ref)from company_event where com_idx = #{com_idx} and comment_ref <![CDATA[>]]> (select comment_ref from company_event where event_idx = #{event_idx})) 
+and comment_level = 0)
 where rownum = 1
 </select>
 

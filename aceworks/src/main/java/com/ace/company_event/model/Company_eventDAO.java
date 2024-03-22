@@ -18,4 +18,5 @@ public interface Company_eventDAO {
 	public Company_eventDTO company_eventNextEvent(Map map);
 	public int company_eventReadnumUpdate(int event_idx);
 	public int company_eventReWrite(Company_eventDTO eventDto);
+	public int company_eventNextReWrite(Company_eventDTO eventDto);
 }

@@ -110,10 +110,15 @@ h3 {
 						${eventDto.event_content }
 						</td>
 
-						<td>
-						<h5>찾아오시는 길</h5>
-						<div id="map" class="d-flex justify-content-center"></div>
-					
+						<td style="vertical-align: top;">
+						
+				        <div class="d-flex justify-content-end" style="height: 100%;">
+				            <div style="margin-right: 20px;">
+				                <h5>찾아오시는 길</h5>
+				                <div id="map"></div>
+				            </div>
+				        </div>
+				        
 					    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 					    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94d3da3bc59e086f2502c483efb65662&libraries=services"></script>
 					    <script>
@@ -131,7 +136,6 @@ h3 {
 					
 					        window.onload = function() {
 					            var address = "${eventDto.event_addr }";
-					            //var mapAddress = address.substring(5);
 					            
 					            if (address.trim() !== '') {
 					                geocoder.addressSearch(address, function(results, status) {
@@ -150,6 +154,7 @@ h3 {
 					</td>
 					</tr>
 				</table>
+				
 
 
 				<div class="d-flex justify-content-center">

@@ -167,6 +167,19 @@ h3 {
 					</td>
 					</tr>
 				</table>
+					<c:url var="company_eventContentUrl" value="company_event_Content.do">
+					<c:param name="event_idx">${nexteventDto.event_idx }</c:param>
+					<c:param name="com_idx">${dto.getCom_idx()}</c:param>
+					</c:url>
+				<h5><a href="${company_eventContentUrl }">다음글 :${nexteventDto.event_title }</a></h5>
+				
+					<c:url var="company_eventContentUrll" value="company_event_Content.do">
+					<c:param name="event_idx">${previouseventDto.event_idx }</c:param>
+					<c:param name="com_idx">${dto.getCom_idx()}</c:param>
+					</c:url>
+				<h5><a href="${company_eventContentUrll }">이전글 :${previouseventDto.event_title }</a></h5>
+
+			
 
 <script src="js/httpRequest.js"></script>		
 <form>
@@ -267,9 +280,7 @@ h3 {
 
 
 <div id="commentView" class="container">
-
 	<table id="commentList" width="1000" cellspacing="0" class="table"></table>
-
 </div>
 
 

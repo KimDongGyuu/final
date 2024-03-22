@@ -74,11 +74,28 @@ public class Company_eventController {
 		return mav;
 	}
 	
+	@RequestMapping("/company_eventNextReWrite")
+	public ModelAndView company_eventNextReWrite(Company_eventDTO eventDto) {
+		int result = company_eventService.company_eventNextReWrite(eventDto);
+		String msg = result > 0? "댓글이 등록 되었습니다.":"댓글 등록에 실패 하였습니다.";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.setViewName("yongJson");
+		return mav;
+	}
+	
 	@RequestMapping("/company_event_Content")
 	public ModelAndView company_eventContent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx") Integer com_idx) {
 		Company_eventDTO eventDto = company_eventService.company_eventContent(event_idx,com_idx);
+		
+		Company_eventDTO nexteventDto = company_eventService.company_eventNextEvent(event_idx, com_idx);
+		
+		Company_eventDTO previouseventDto = company_eventService.company_eventPreviousEvent(event_idx, com_idx);
+		
 		int result = company_eventService.company_eventReadnumUpdate(event_idx);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("nexteventDto",nexteventDto);
+		mav.addObject("previouseventDto",previouseventDto);
 		mav.addObject("eventDto",eventDto);
 		mav.addObject("com_idx",com_idx);
 		mav.addObject("event_idx",event_idx);

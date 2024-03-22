@@ -32,6 +32,12 @@ public class company_eventServiceImple implements company_eventService {
 	}
 	
 	@Override
+	public int company_eventNextReWrite(Company_eventDTO eventDto) {
+		int count = Company_eventDao.company_eventNextReWrite(eventDto);
+		return count;
+	}
+	
+	@Override
 	public List<Company_eventDTO> company_eventReWriteList(int com_idx, int comment_ref) {
 		Map map = new HashMap();
 		map.put("com_idx", com_idx);

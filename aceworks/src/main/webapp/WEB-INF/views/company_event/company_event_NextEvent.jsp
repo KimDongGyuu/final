@@ -110,9 +110,14 @@ h3 {
 						${eventDto.event_content }
 						</td>
 
-						<td>
-						<h5>찾아오시는 길</h5>
-						<div id="map" class="d-flex justify-content-center"></div>
+						<td style="vertical-align: top;">
+						
+				        <div class="d-flex justify-content-end" style="height: 100%;">
+				            <div style="margin-right: 20px;">
+				                <h5>찾아오시는 길</h5>
+				                <div id="map"></div>
+				            </div>
+				        </div>
 					
 					    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 					    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94d3da3bc59e086f2502c483efb65662&libraries=services"></script>
@@ -150,6 +155,109 @@ h3 {
 					</td>
 					</tr>
 				</table>
+<script src="js/httpRequest.js"></script>		
+<form>
+<input id="event_writer" type="hidden" name="event_writer" value="${dto.getName()}">
+<input id="comment_ref" type="hidden" name="comment_ref" value="${eventDto.comment_ref}">
+<input id="comment_sunbun" type="hidden" name="comment_sunbun" value="${eventDto.comment_sunbun}">
+<input id="event_idx" type="hidden" name="event_idx" value="${eventDto.event_idx}">
+<input id="com_idx" type="hidden" name="com_idx" value="${dto.getCom_idx()}">
+
+
+<div class="form-floating mb-5" style="position: relative;">
+    <textarea class="form-control" name="event_content" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+    <label for="floatingTextarea2">댓글 내용을 입력하세요.</label>
+    <button id="button" class="btn btn-primary mt-2" style="position: absolute; bottom: 10px; right: 10px;" onclick="eventReWrite()">작성</button>
+</div>
+</form>
+
+<script>
+function eventReWrite() {
+    var writer = document.getElementById('event_writer').value;
+    var ref = document.getElementById('comment_ref').value;
+    var sunbun = document.getElementById('comment_sunbun').value;
+    var eventIdx = document.getElementById('event_idx').value;
+    var comIdx = document.getElementById('com_idx').value;
+    var content = document.getElementById('floatingTextarea2').value;
+
+    var params = "event_writer=" + writer + "&comment_ref=" + ref + "&comment_sunbun=" + sunbun + "&event_idx=" + eventIdx + "&com_idx=" + comIdx + "&event_content=" + content;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "company_eventReWrite.do", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var responseData = JSON.parse(xhr.responseText);
+            if (responseData.success) {
+                alert(responseData.msg);
+ 
+            } else {
+                alert(responseData.msg);
+            }
+        }
+    };
+
+    xhr.send(params);
+}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        allReList(${sessionScope.dto.com_idx},${eventDto.comment_ref});
+    });
+
+    function allReList(com_idx, comment_ref) {
+        var param = 'com_idx=' + com_idx + '&comment_ref=' + comment_ref;
+        sendRequest('company_eventReWriteList.do', param, showShowResult, 'GET');
+    }
+    
+    
+    function showShowResult() {
+        if (XHR.readyState == 4) {
+            if (XHR.status == 200) {
+                var data = XHR.responseText;
+                data = JSON.parse(data);
+                var list = data.list;
+                var commentListNode = document.getElementById('commentList');
+                commentListNode.innerHTML = '';
+                if (list != null && list.length != 0) {
+                    var tableNode = document.createElement('table');
+                    tableNode.className = 'table table-striped'; 
+                    var tbodyNode = document.createElement('tbody');
+
+                    for (var i = 0; i < list.length; i++) {
+                        var trNode = document.createElement('tr');
+                        var thWriter = document.createElement('th');
+                        var tdContent = document.createElement('td');
+                        thWriter.innerHTML = '작성자: ' + list[i].event_writer;
+                        tdContent.innerHTML = list[i].event_content.replace(/\n/g, '<br>');
+
+                        trNode.appendChild(thWriter);
+                        trNode.appendChild(tdContent);
+                        tbodyNode.appendChild(trNode);
+                    }
+                    tableNode.appendChild(tbodyNode);
+                    commentListNode.appendChild(tableNode);
+                } else {
+                    var divNode = document.createElement('div');
+                    divNode.innerHTML = '댓글이 없습니다.';
+                    commentListNode.appendChild(divNode);
+                }
+            } else {
+                alert('댓글을 불러오는 도중 오류가 발생했습니다.');
+            }
+        }
+    }
+</script>
+
+
+
+<div id="commentView" class="container">
+	<table id="commentList" width="1000" cellspacing="0" class="table"></table>
+</div>
+
+
 
 
 				<div class="d-flex justify-content-center">

@@ -24,6 +24,12 @@ public class Company_eventDAOImple implements Company_eventDAO {
 		int count = sqlmap.insert("company_eventReWrite",eventDto);
 		return count;
 	}
+
+	@Override
+	public int company_eventNextReWrite(Company_eventDTO eventDto) {
+		int count = sqlmap.insert("company_eventNextReWrite",eventDto);
+		return count;
+	}
 	
 	@Override
 	public List<Company_eventDTO> company_eventReWriteList(Map map) {
