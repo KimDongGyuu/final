@@ -15,7 +15,10 @@ values(#{com_idx},company_event_event_idx.nextval,'제목컬럼',#{event_content
 </insert>
 
 <select id="company_eventReWriteList" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
-select * from company_event where comment_ref=#{comment_ref} and com_idx=#{com_idx} and comment_sunbun > 0 order by comment_sunbun desc
+select * from
+(select rownum as rnum,a.*from
+(select * from company_event where comment_ref=#{comment_ref} and com_idx=#{com_idx} and comment_sunbun <![CDATA[>]]> 0 order by comment_sunbun desc)a)b 
+where rnum <![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
 </select>
 
 <select id="company_eventList" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
@@ -33,7 +36,11 @@ select * from company_event where event_idx=#{event_idx} and com_idx=#{com_idx}
 select * from company_event where event_idx=#{event_idx} and com_idx=#{com_idx}
 </select>
 
-
+<select id="eventReListTotalCnt" parameterType="java.util.Map" resultType="Integer">
+select count(*) from company_event where comment_ref = #{comment_ref}
+and com_idx = #{com_idx}
+and comment_sunbun > 0
+</select>
 
 <select id="eventTotalCnt" parameterType="Integer" resultType="Integer">
 select count(*) from company_event where com_idx=#{com_idx} and comment_level=0
@@ -53,6 +60,8 @@ select count(*) from company_event where event_title like '%' || #{eventKeyword}
 <delete id="company_eventDelete" parameterType="Integer">
 delete from company_event where event_idx=#{event_idx}
 </delete>
+
+
 
 <select id="company_eventUpdateForm" parameterType="Integer" resultType="com.ace.company_event.model.Company_eventDTO">
 select * from company_event where event_idx=#{event_idx}
@@ -75,6 +84,12 @@ and comment_level = 0)where rownum = 1
 
 <select id="company_eventNextEvent" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
 select * from (select * from company_event where com_idx = #{com_idx} and comment_ref = (select min(comment_ref)from company_event where com_idx = #{com_idx} and comment_ref <![CDATA[>]]> (select comment_ref from company_event where event_idx = #{event_idx})) 
+and comment_level = 0)
+where rownum = 1
+</select>
+
+<select id="company_eventSearchNextEvent" parameterType="java.util.Map" resultType="com.ace.company_event.model.Company_eventDTO">
+select * from (select * from company_event where com_idx = #{com_idx} and comment_ref = (select min(comment_ref)from company_event where com_idx = #{com_idx} and event_title like '%' || #{eventKeyword} || '%' and comment_ref <![CDATA[>]]> (select comment_ref from company_event where event_idx = #{event_idx})) 
 and comment_level = 0)
 where rownum = 1
 </select>

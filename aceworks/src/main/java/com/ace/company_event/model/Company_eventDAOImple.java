@@ -74,6 +74,11 @@ public class Company_eventDAOImple implements Company_eventDAO {
 		int count = sqlmap.selectOne("eventSearchTotalCnt",map);
 		return count;
 	}
+	@Override
+	public int eventReListTotalCnt(Map map) {
+		int count = sqlmap.selectOne("eventReListTotalCnt",map);
+		return count;
+	}
 	
 	@Override
 	public int company_eventDelete(int event_idx) {
@@ -108,6 +113,12 @@ public class Company_eventDAOImple implements Company_eventDAO {
 	@Override
 	public Company_eventDTO company_eventNextEvent(Map map) {
 		Company_eventDTO eventDto = sqlmap.selectOne("company_eventNextEvent",map);
+		return eventDto;
+	}
+	
+	@Override
+	public Company_eventDTO company_eventSearchNextEvent(Map map) {
+		Company_eventDTO eventDto = sqlmap.selectOne("company_eventSearchNextEvent",map);
 		return eventDto;
 	}
 	

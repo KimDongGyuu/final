@@ -158,20 +158,21 @@ h3 {
 
 				<table width="1000" cellspacing="0" class="table table-hover">
 					<tr>
-						<c:choose>
-						    <c:when test="${empty nexteventDto.event_title}">
-						        <td>다음글이 없습니다.</td>
-						    </c:when>
-						    <c:otherwise>
-						        <td>
-						            <c:url var="company_eventContentUrl" value="company_event_Content.do">
-						                <c:param name="event_idx">${nexteventDto.event_idx }</c:param>
-						                <c:param name="com_idx">${dto.getCom_idx()}</c:param>
-						            </c:url>
-						            <a href="${company_eventContentUrl}">다음글 : ${nexteventDto.event_title}</a>
-						        </td>
-						    </c:otherwise>
-						</c:choose>
+					<c:choose>
+					    <c:when test="${empty nexteventDto.event_title}">
+					        <td>다음글이 없습니다.</td>
+					    </c:when>
+					    <c:otherwise>
+					        <td>
+					            <c:url var="company_eventContentUrl" value="company_event_Content.do">
+					                <c:param name="event_idx">${nexteventDto.event_idx }</c:param>
+					                <c:param name="com_idx">${dto.getCom_idx()}</c:param>
+					            </c:url>
+					            <a href="${company_eventContentUrl}">다음글 : ${nexteventDto.event_title}</a>
+					        </td>
+					    </c:otherwise>
+					</c:choose>
+
 					</tr>
 
 					<tr>
@@ -189,9 +190,9 @@ h3 {
 						        </td>
 						    </c:otherwise>
 						</c:choose>
+
 					</tr>
 				</table>
-
 
 
 
@@ -261,24 +262,45 @@ h3 {
                 var list = data.list;
                 var commentListNode = document.getElementById('commentList');
                 commentListNode.innerHTML = '';
+
                 if (list != null && list.length != 0) {
+                    // 테이블 생성
                     var tableNode = document.createElement('table');
                     tableNode.className = 'table table-striped'; 
+                    var theadNode = document.createElement('thead');
                     var tbodyNode = document.createElement('tbody');
 
-                    for (var i = 0; i < list.length; i++) {
-                        var trNode = document.createElement('tr');
-                        var thWriter = document.createElement('th');
-                        var tdContent = document.createElement('td');
-                        thWriter.innerHTML = '작성자: ' + list[i].event_writer;
-                        tdContent.innerHTML = list[i].event_content.replace(/\n/g, '<br>');
+                    // 테이블 헤더 생성
+                    var headerRow = document.createElement('tr');
+                    var writerHeader = document.createElement('th');
+                    writerHeader.textContent = '작성자';
+                    var contentHeader = document.createElement('th');
+                    contentHeader.textContent = '내용';
 
-                        trNode.appendChild(thWriter);
-                        trNode.appendChild(tdContent);
-                        tbodyNode.appendChild(trNode);
+                    headerRow.appendChild(writerHeader);
+                    headerRow.appendChild(contentHeader);
+                    theadNode.appendChild(headerRow);
+                    tableNode.appendChild(theadNode);
+
+                    // 댓글 데이터 반복해서 테이블에 추가
+                    for (var i = 0; i < list.length; i++) {
+                        var rowData = list[i];
+                        var row = document.createElement('tr');
+
+                        var writerCell = document.createElement('td');
+                        writerCell.textContent = rowData.event_writer;
+
+                        var contentCell = document.createElement('td');
+                        contentCell.innerHTML = rowData.event_content.replace(/\n/g, '<br>');
+
+                        row.appendChild(writerCell);
+                        row.appendChild(contentCell);
+                        tbodyNode.appendChild(row);
                     }
+
                     tableNode.appendChild(tbodyNode);
                     commentListNode.appendChild(tableNode);
+                    
                 } else {
                     var divNode = document.createElement('div');
                     divNode.innerHTML = '댓글이 없습니다.';
@@ -289,15 +311,19 @@ h3 {
             }
         }
     }
+
+
+
+
+
+
 </script>
 
 
 
-<div id="commentView" class="container">
+<div id="commentView" class="container"><h5 style="font-weight: bold;">댓글</h5>
 	<table id="commentList" width="1000" cellspacing="0" class="table"></table>
 </div>
-
-
 
 				<c:if test="${dto.rank_num == 2 || dto.rank_num == 1}">
 				<div class="d-flex justify-content-center">
@@ -320,7 +346,6 @@ h3 {
 				</c:if>
 			</div>
 		</div>
-
 </div>
 </body>
 </html>

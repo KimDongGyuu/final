@@ -156,7 +156,25 @@ h3 {
 					</tr>
 				</table>
 				<table width="1000" cellspacing="0" class="table table-hover">
-
+					<tr>
+						<c:choose>
+							<c:when test="${empty SearchNexteventDto.event_title}">
+								<td>다음글이 없습니다.</td>
+							</c:when>
+							<c:otherwise>
+							<td>
+							<c:url var="company_eventSearchContentUrl" value="company_event_SearchContent.do">
+							<c:param name="event_idx">${SearchNexteventDto.event_idx }</c:param>
+							<c:param name="com_idx">${dto.getCom_idx()}</c:param>
+							<c:param name="eventKeyword">${eventKeyword }</c:param>
+							</c:url>
+							<a href="${company_eventSearchContentUrl }">다음글 : ${SearchNexteventDto.event_title }</a>
+							</td>
+							</c:otherwise>
+						</c:choose>
+					</tr>
+					
+						
 					<tr>
 						<c:choose>
 							<c:when test="${empty SearchPreviouseventDto.event_title}">

@@ -36,12 +36,19 @@ public class Company_eventController {
 	}
 	
 	@RequestMapping("/company_eventReWriteList")
-	public ModelAndView company_eventReWriteList(@RequestParam("com_idx")int com_idx,@RequestParam("comment_ref")int comment_ref) {
-		List<Company_eventDTO> list = company_eventService.company_eventReWriteList(com_idx, comment_ref);
+	public ModelAndView company_eventReWriteList(@RequestParam("com_idx")int com_idx,@RequestParam("comment_ref")int comment_ref,@RequestParam(value = "cp", defaultValue = "1") int cp) {
+		int totalCnt = company_eventService.eventReListTotalCnt(com_idx, comment_ref);
+		int listSize = 10;
+		int pageSize = 5;
+		
+		String pageStr = com.ace.page.company_eventReListPage.makePage("company_eventReWriteList.do", totalCnt, listSize, pageSize, cp, com_idx, comment_ref);
+		
+		List<Company_eventDTO> list = company_eventService.company_eventReWriteList(com_idx, comment_ref, cp, listSize);
 		ModelAndView mav =new ModelAndView();
 		mav.addObject("com_idx",com_idx);
 		mav.addObject("comment_ref",comment_ref);
 		mav.addObject("list",list);
+		mav.addObject("pageStr",pageStr);
 		mav.setViewName("yongJson");
 		return mav;
 	}
@@ -108,13 +115,16 @@ public class Company_eventController {
 	public ModelAndView company_eventSearchContnet(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx") Integer com_idx,@RequestParam("eventKeyword") String eventKeyword) {
 		Company_eventDTO eventDto = company_eventService.company_eventSearchContnet(event_idx, com_idx);
 		Company_eventDTO SearchPreviouseventDto = company_eventService.company_eventSearchPreviousEvent(event_idx, com_idx,eventKeyword);
+		Company_eventDTO SearchNexteventDto = company_eventService.company_eventSearchNextEvent(event_idx, com_idx, eventKeyword);
 		int result = company_eventService.company_eventReadnumUpdate(event_idx);
 		
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("SearchPreviouseventDto",SearchPreviouseventDto);
+		mav.addObject("SearchNexteventDto", SearchNexteventDto);
 		mav.addObject("eventDto",eventDto);
 		mav.addObject("com_idx",com_idx);
+		mav.addObject("eventKeyword",eventKeyword);
 		mav.addObject("event_idx",event_idx);
 		mav.addObject("result",result);
 		mav.setViewName("company_event/company_event_SearchContent");
