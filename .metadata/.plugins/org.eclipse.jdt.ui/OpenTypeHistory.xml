@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-    <typeInfo handle="=aceworks/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ace.company_news.model{Company_newsDAO.java[Company_newsDAO" modifiers="513" timestamp="1710774279448"/>
-    <typeInfo handle="=aceworks/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ace.company_news.service{company_newsService.java[company_newsService" modifiers="513" timestamp="1710938806133"/>
-    <typeInfo handle="=aceworks/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ace.company_event.model{Company_eventDAO.java[Company_eventDAO" modifiers="513" timestamp="1711019614989"/>
-    <typeInfo handle="=aceworks/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ace.company_event.service{company_eventService.java[company_eventService" modifiers="513" timestamp="1711019747806"/>
+    <typeInfo handle="=aceworks/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ace.company_news.model{Company_newsDAO.java[Company_newsDAO" modifiers="513" timestamp="1711111208665"/>
+    <typeInfo handle="=aceworks/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ace.company_news.service{company_newsService.java[company_newsService" modifiers="513" timestamp="1711111208634"/>
+    <typeInfo handle="=aceworks/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ace.company_event.model{Company_eventDAO.java[Company_eventDAO" modifiers="513" timestamp="1711177706910"/>
+    <typeInfo handle="=aceworks/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ace.company_event.service{company_eventService.java[company_eventService" modifiers="513" timestamp="1711178325938"/>
 </typeInfoHistroy>

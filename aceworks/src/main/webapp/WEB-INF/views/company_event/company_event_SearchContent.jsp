@@ -205,7 +205,7 @@ h3 {
 <input id="comment_sunbun" type="hidden" name="comment_sunbun" value="${eventDto.comment_sunbun}">
 <input id="event_idx" type="hidden" name="event_idx" value="${eventDto.event_idx}">
 <input id="com_idx" type="hidden" name="com_idx" value="${dto.getCom_idx()}">
-
+<input id=eventKeyword type="hidden" name="eventKeyword" value="${eventKeyword}">
 
 <div class="form-floating mb-5" style="position: relative;">
     <textarea class="form-control" name="event_content" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
@@ -222,8 +222,9 @@ h3 {
         var eventIdx = document.getElementById('event_idx').value;
         var comIdx = document.getElementById('com_idx').value;
         var content = document.getElementById('floatingTextarea2').value;
-
-        var params = "event_writer=" + writer + "&comment_ref=" + ref + "&comment_sunbun=" + sunbun + "&event_idx=" + eventIdx + "&com_idx=" + comIdx + "&event_content=" + content;
+		var eventKeyword = document.getElementById('eventKeyword').value;
+        
+        var params = "event_writer=" + writer + "&comment_ref=" + ref + "&comment_sunbun=" + sunbun + "&event_idx=" + eventIdx + "&com_idx=" + comIdx + "&event_content=" + content+'&eventKeyword'+eventKeyword;
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "company_eventReWrite.do", true);
