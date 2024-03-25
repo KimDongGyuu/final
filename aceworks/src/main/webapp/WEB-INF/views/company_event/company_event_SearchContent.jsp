@@ -69,7 +69,7 @@ h3 {
         </c:if>
     }
 </script>
-		<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a> <br><a href="fileUploadForm.do">파일업로드</a></div>
+		<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a></div>
 	</div>
 
 		<div id="right">
@@ -136,7 +136,7 @@ h3 {
 					
 					        window.onload = function() {
 					            var address = "${eventDto.event_addr }";
-					            //var mapAddress = address.substring(5);
+					    
 					            
 					            if (address.trim() !== '') {
 					                geocoder.addressSearch(address, function(results, status) {

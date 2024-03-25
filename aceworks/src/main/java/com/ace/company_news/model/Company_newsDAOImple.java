@@ -51,6 +51,12 @@ public class Company_newsDAOImple implements Company_newsDAO {
 	}
 	
 	@Override
+	public Company_newsDTO company_newsSearchContent(Map map) {
+		Company_newsDTO newsDto = sqlmap.selectOne("company_newsSearchContent",map);
+		return newsDto;
+	}
+	
+	@Override
 	public int company_newsDelete(int news_idx) {
 		int count = sqlmap.delete("company_newsDelete",news_idx);
 		return count;
@@ -81,8 +87,20 @@ public class Company_newsDAOImple implements Company_newsDAO {
 	}
 	
 	@Override
+	public Company_newsDTO company_newsSearchPreviousNews(Map map) {
+		Company_newsDTO newsDto = sqlmap.selectOne("company_newsSearchPreviousNews",map);
+		return newsDto;
+	}
+	
+	@Override
 	public Company_newsDTO company_newsNextNews(Map map) {
 		Company_newsDTO newsDto = sqlmap.selectOne("company_newsNextNews",map);
+		return newsDto;
+	}
+	
+	@Override
+	public Company_newsDTO company_newsSearchNextNews(Map map) {
+		Company_newsDTO newsDto = sqlmap.selectOne("company_newsSearchNextNews",map);
 		return newsDto;
 	}
 }

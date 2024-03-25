@@ -41,7 +41,7 @@ h3 {
 <div id="left">
 			<button id="bt" type="button" class="btn btn-outline-primary"
 				onclick="location.href='company_event_Writeform.do';">글 작성</button>
-<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a> <br><a href="fileUploadForm.do">파일업로드</a></div>
+<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a></div>
 		</div>
 		<div id="right">
 		<div class="mt-5 mb-2"><span class="h4">게시판 &gt;&gt; 임직원 경조사</span></div>

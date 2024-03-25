@@ -95,6 +95,25 @@ private company_newsService company_newsService;
 		return mav;
 	}
 	
+	@RequestMapping("/company_news_SearchContent")
+	public ModelAndView company_newsSearchContent(@RequestParam("news_idx") Integer news_idx,@RequestParam("com_idx") Integer com_idx,@RequestParam("keyword") String keyword) {
+		Company_newsDTO newsDto = company_newsService.company_newsSearchContent(news_idx, com_idx);
+		Company_newsDTO SearchPreviousDto = company_newsService.company_newsSearchPreviousNews(news_idx, com_idx, keyword);
+		Company_newsDTO SearchNextDto = company_newsService.company_newsSearchNextNews(news_idx, com_idx, keyword);
+		
+		int result = company_newsService.company_newsReadnumUpdate(news_idx);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("newsDto",newsDto);
+		mav.addObject("SearchPreviousDto",SearchPreviousDto);
+		mav.addObject("SearchNextDto",SearchNextDto);
+		mav.addObject("com_idx",com_idx);
+		mav.addObject("news_idx",news_idx);
+		mav.addObject("result",result);
+		mav.addObject("keyword",keyword);
+		mav.setViewName("company_news/company_news_SearchContent");
+		return mav;
+	}
+	
 	@RequestMapping("/company_news_Delete")
 	public ModelAndView company_newsDelete(@RequestParam("news_idx")int news_idx) {
 		int result = company_newsService.company_newsDelete(news_idx);

@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/style.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-5">채팅방 목록</h2>
+    <div>
+        <a href="/path/to/create/chatroom" class="btn btn-primary mt-3">새 채팅방 만들기</a>
+    </div>
+    <ul class="list-group mt-3">
+        <%-- 채팅방 목록 데이터 반복 처리 --%>
+
+            <li class="list-group-item">
+                채팅방 번호: 1, 개설일: 2024.03.25, 참여 인원: 2
+                <a>입장하기</a>
+            </li>
+
+    </ul>
+</div>
+</body>
+</html>

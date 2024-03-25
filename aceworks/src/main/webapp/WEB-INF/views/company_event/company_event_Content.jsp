@@ -69,7 +69,7 @@ h3 {
         </c:if>
     }
 </script>
-		<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a> <br><a href="fileUploadForm.do">파일업로드</a></div>
+		<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a></div>
 	</div>
 
 		<div id="right">
@@ -264,13 +264,11 @@ h3 {
                 commentListNode.innerHTML = '';
 
                 if (list != null && list.length != 0) {
-                    // 테이블 생성
                     var tableNode = document.createElement('table');
                     tableNode.className = 'table table-striped'; 
                     var theadNode = document.createElement('thead');
                     var tbodyNode = document.createElement('tbody');
 
-                    // 테이블 헤더 생성
                     var headerRow = document.createElement('tr');
                     var writerHeader = document.createElement('th');
                     writerHeader.textContent = '작성자';
@@ -282,7 +280,6 @@ h3 {
                     theadNode.appendChild(headerRow);
                     tableNode.appendChild(theadNode);
 
-                    // 댓글 데이터 반복해서 테이블에 추가
                     for (var i = 0; i < list.length; i++) {
                         var rowData = list[i];
                         var row = document.createElement('tr');

@@ -37,6 +37,7 @@ h3 {
 </style>
 </head>
 <body>
+
 	<div>
 		<div id="left">
 			<button id="bt" type="button" class="btn btn-outline-primary"
@@ -76,12 +77,13 @@ h3 {
 					<c:forEach var="newsDto" items="${lists }">
 						<tr class="text-center">
 							<th scope="row">${newsDto.news_idx }</th>
-							<c:url var="company_newsContentUrl"
-								value="company_news_Content.do">
+							<c:url var="company_newsSearchContentUrl"
+								value="company_news_SearchContent.do">
 								<c:param name="news_idx">${newsDto.news_idx }</c:param>
 								<c:param name="com_idx">${dto.getCom_idx()}</c:param>
+								<c:param name="keyword">${keyword}</c:param>
 							</c:url>
-							<td><a href="${company_newsContentUrl }">${newsDto.news_title }</a></td>
+							<td><a href="${company_newsSearchContentUrl }">${newsDto.news_title }</a></td>
 							<td>${newsDto.news_writer }</td>
 							<td>${newsDto.news_writedate }</td>
 							<td>${newsDto.news_readnum }</td>
