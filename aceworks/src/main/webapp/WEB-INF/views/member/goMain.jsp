@@ -20,6 +20,6 @@
 <c:if test="${dto.rank_num == 2 || dto.rank_num == 1}">
 	<a href="#">기업관리</a>
 </c:if>
-
+<a>채팅</a>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.ace.controller;
 
-import java.io.*;
+
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ace.company_news.model.Company_newsDTO;
-import com.ace.company_news.model.FileUploadDTO;
 import com.ace.company_news.service.company_newsService;
 
 
@@ -149,33 +147,6 @@ private company_newsService company_newsService;
 //		mav.setViewName("company_news/company_news_NextNews");
 //		return mav;
 //	}
-	
-	@RequestMapping("/fileUploadForm")
-	public String fileUploadForm() {
-		return "company_news/fileUploadForm";
-	}
-	
-	@RequestMapping("/fileUpload")
-	public String fileUpload(FileUploadDTO dto) {
-		copyInto(dto.getNews_file());
-		return "company_news/fileOk";
-	}
-	
-	/**파일복사 메서드*/
-	public void copyInto(MultipartFile news_file) {
-		System.out.println("파일명 : "+news_file.getOriginalFilename());
-		
-		try {
-			byte bytes[] = news_file.getBytes(); //원본
-			File f = new File("C:/JavaStudy/upload/"+news_file.getOriginalFilename()); //빈 종이 
-			FileOutputStream fos = new FileOutputStream(f); //복사기에 빈종이 삽입
-			fos.write(bytes);
-			fos.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	}
 }
 
 
