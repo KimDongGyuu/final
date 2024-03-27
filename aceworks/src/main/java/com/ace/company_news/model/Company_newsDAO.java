@@ -19,4 +19,5 @@ public interface Company_newsDAO {
 	public Company_newsDTO company_newsSearchPreviousNews(Map map);
 	public Company_newsDTO company_newsNextNews(Map map);
 	public Company_newsDTO company_newsSearchNextNews(Map map);
+	public List<Company_newsDTO> comNews3(int com_idx);
 }

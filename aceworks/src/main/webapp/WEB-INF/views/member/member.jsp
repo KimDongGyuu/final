@@ -86,8 +86,7 @@ function sample4_execDaumPostcode() {
         }
     }).open();
 }
-</script>
-<script>
+
 function show(){
 	sendRequest('memberJoin.do',null,showResult,'GET');		
 }
@@ -96,11 +95,8 @@ function showResult(){
 		if(XHR.status==200){
 			var data = XHR.responseText;
 			var divNode = document.all.memberJoin;
-			if(divNode.innerHTML==''){
-				divNode.innerHTML = data;
-			}else{
 				divNode.innerHTML = '';
-			}
+				divNode.innerHTML = data;
 		}		
 	}
 }
@@ -110,18 +106,64 @@ function show2(){
 
 function idCheckMsg(){
 	var id = document.join.id.value;
+	if(id==''||id==null){
+		window.alert('아이디를 입력해주세요~');
+		return false;
+	}
 	var param = 'id='+id;
-	sendRequest('idCheck.do',param,idCheckShow,'GET');
+	sendRequest('idCheck.do',param,idCheckShow,'GET');	
 }
 
 function idCheckShow(){
-	if(XHR.readyState==4){
+	if(XHR.readyState==4){		
 		if(XHR.status==200){
 			var data = XHR.responseText;
-			var msgspan = document.getElementById('idCheckMsg');
+			var msgspan = document.all.idCheckMsg;
+			msgspan.innerHTML=data;					
+		
+		}
+	}
+}
+
+function com_show(){
+	window.open("companyFind.do","기업 조회","width=400, height=300, top=10, left=10");
+}
+
+function comCheck(){
+	var com_name = document.join.com_name.value;
+	if(com_name==''||com_name==null){
+		window.alert('기업명을 입력해주세요~');
+		return;
+	}
+	var param = 'com_name='+com_name;
+	sendRequest('comCheck.do',param,comCheckShow,'GET');	
+}
+
+function comCheckShow(){
+	if(XHR.readyState==4){		
+		if(XHR.status==200){
+			var data = XHR.responseText;
+			var msgspan = document.all.comCheck;
 			msgspan.innerHTML=data;
 		}
 	}
+}
+
+function fileUp(a) {
+    var fkind = a.value.lastIndexOf('.');
+    var fname = a.value.substring(fkind + 1, a.length);
+    var ftype = fname.toLowerCase();
+    var check_ftype = ['jpg', 'png', 'jpeg'];
+
+    if (check_ftype.indexOf(ftype) == -1) {
+        alert('jpg, jpeg, png 파일만 선택할 수 있습니다.');
+        var newInput = a.cloneNode(true);
+        newInput.onchange = fileUp; 
+        var parent = a.parentNode;
+        parent.replaceChild(newInput, a);
+        newInput.value = '';
+        return false;
+    }
 }
 
 </script>

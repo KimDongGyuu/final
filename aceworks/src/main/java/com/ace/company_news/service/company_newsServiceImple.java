@@ -154,6 +154,12 @@ public class company_newsServiceImple implements company_newsService {
 		Company_newsDTO newsDto = company_newsDao.company_newsSearchNextNews(map);
 		return newsDto;
 	}
+	
+	@Override
+	   public List<Company_newsDTO> comNews3(int com_idx) {
+	      List<Company_newsDTO> list = company_newsDao.comNews3(com_idx);
+	      return list;
+	   }
 }
 
 

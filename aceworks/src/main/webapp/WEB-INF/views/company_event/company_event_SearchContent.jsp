@@ -20,7 +20,7 @@ function updateEvent(event_idx) {
 <style>
 #left {
 	width: 200px;
-	height: 1500px;
+	height: 1200px;
 	float: left;
 	border-right: 2px solid darkblue;
 	margin-left: 50px;

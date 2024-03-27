@@ -34,7 +34,7 @@
 }
 
 #bt {
-	width: 180px;
+	width: 150px;
 	height: 40px;
 }
 #PNbt {
@@ -44,6 +44,10 @@
 
 h3 {
 	text-align: center;
+}
+#comimg{
+	width: 150px;
+	height: 150px;
 }
 </style>
 </head>
@@ -64,6 +68,9 @@ h3 {
 		        </c:if>
 		    }
 		</script>
+				<div class="mt-3">
+<a href="goMain.do"><img id="comimg" src="img/${cdto.com_name}/${cdto.com_img}"></a>		
+		</div>
 			<div class="mt-3">
 				<a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a>
 			</div>

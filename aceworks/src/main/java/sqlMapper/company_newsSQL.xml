@@ -74,6 +74,11 @@
 	select * from (select * from company_news where com_idx=#{com_idx} and news_title like '%' || #{keyword} || '%' and news_writedate <![CDATA[>]]> (select news_writedate from company_news where news_idx=#{news_idx})order by news_writedate asc)
 	where rownum = 1
 	</select>
+	
+	<select id="comNews3" parameterType="Integer" resultType="com.ace.company_news.model.Company_newsDTO">
+   select * from (select * from company_news where com_idx=#{com_idx} order by news_idx DESC)
+   where ROWNUM <![CDATA[<]]>= 5
+   </select>
 </mapper>
 
 

@@ -22,8 +22,13 @@
 }
 
 #bt {
-	width: 180px;
+	width: 150px;
 	height: 40px;
+}
+
+#comimg{
+	width: 150px;
+	height: 150px;
 }
 </style>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -36,7 +41,9 @@
 			<button id="bt" type="button" class="btn btn-outline-primary"
 				onclick="location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
 			
-			
+		<div class="mt-3">
+		<a href="goMain.do"><img id="comimg" src="img/${cdto.com_name}/${cdto.com_img}"></a>		
+		</div>
 			<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a></div>
 			
 		</div>

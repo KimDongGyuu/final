@@ -21,4 +21,6 @@ public interface company_newsService {
 	public Company_newsDTO company_newsSearchPreviousNews(int news_idx,int com_idx,String keyword);
 	public Company_newsDTO company_newsNextNews(int news_idx,int com_idx);
 	public Company_newsDTO company_newsSearchNextNews(int news_idx,int com_idx,String keyword);
+	public List<Company_newsDTO> comNews3(int com_idx);
+	
 }

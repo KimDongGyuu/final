@@ -179,28 +179,17 @@ public class Company_eventController {
 		mav.setViewName("company_event/company_eventMsg");
 		return mav;
 	}
-	
-//	@RequestMapping("/company_event_PreviousEvent")
-//	public ModelAndView comcompany_eventPreviousEvent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx")Integer com_idx) {
-//		Company_eventDTO eventDto = company_eventService.company_eventPreviousEvent(event_idx, com_idx);
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("eventDto",eventDto);
-//		mav.addObject("event_idx",event_idx);
-//		mav.addObject("com_idx",com_idx);
-//		mav.setViewName("company_event/company_event_PreviousEvent");
-//		return mav;
-//	}
-//	
-//	@RequestMapping("/company_event_NextEvent")
-//	public ModelAndView company_eventNextEvent(@RequestParam("event_idx") Integer event_idx,@RequestParam("com_idx")Integer com_idx) {
-//		Company_eventDTO eventDto = company_eventService.company_eventNextEvent(event_idx, com_idx);
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("eventDto",eventDto);
-//		mav.addObject("event_idx",event_idx);
-//		mav.addObject("com_idx",com_idx);
-//		mav.setViewName("company_event/company_event_NextEvent");
-//		return mav;
-//	}
+
+	   @RequestMapping("/comEvent3.do")
+	   public ModelAndView comEvent3(
+	         @RequestParam("com_idx")int com_idx
+	         ) {
+	      List<Company_eventDTO> list = company_eventService.comEvent3(com_idx);
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("list", list);
+	      mav.setViewName("member/checkEvent");
+	      return mav;
+	   }
 }
 
 

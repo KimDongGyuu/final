@@ -127,4 +127,10 @@ public class Company_eventDAOImple implements Company_eventDAO {
 		int count = sqlmap.update("company_eventReadnumUpdate",event_idx);
 		return count;
 	}
+	
+	@Override
+	   public List<Company_eventDTO> comEvent3(int com_idx) {
+	      List<Company_eventDTO> list = sqlmap.selectList("comEvent3",com_idx);
+	      return list;
+	   }
 }

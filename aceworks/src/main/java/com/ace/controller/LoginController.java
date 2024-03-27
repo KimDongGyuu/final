@@ -1,6 +1,6 @@
 package com.ace.controller;
 
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ace.member.model.MemberDAO;
+import com.ace.company.model.CompanyDTO;
+import com.ace.company.service.CompanyService;
 import com.ace.member.model.MemberDTO;
+import com.ace.member.service.MemberService;
 
 @Controller
 public class LoginController {
 	@Autowired
-	private MemberDAO memberDao;
+	private MemberService memberService;
+	@Autowired
+	private CompanyService companyService;
 
 	@RequestMapping("/login.do")
 	public String login() {
@@ -34,13 +38,13 @@ public class LoginController {
 			HttpSession session,
 			@RequestParam(value="saveid", defaultValue = "off")String saveid,
 			HttpServletResponse resp) {
-		int result = memberDao.loginCheck(userid, userpwd);
+		int result = memberService.loginCheck(userid, userpwd);
 		ModelAndView mav = new ModelAndView();
-		if(result==memberDao.NOT_ID||result==memberDao.NOT_PWD) {
+		if(result==memberService.NOT_ID||result==memberService.NOT_PWD) {
 			mav.addObject("msg", "아이디 또는 비밀번호가 잘못 되었습니다.");
 			mav.addObject("url", "login.do");
 			mav.setViewName("member/message");
-		}else if(result==memberDao.LOGIN_OK){
+		}else if(result==memberService.LOGIN_OK){
 			if(saveid.equals("on")) {
 				Cookie ck = new Cookie("saveid", userid);
 				ck.setMaxAge(60*60*24*30);
@@ -51,14 +55,16 @@ public class LoginController {
 				resp.addCookie(ck);
 			}
 			
-			MemberDTO dto = memberDao.getUserInfo(userid);
+			MemberDTO dto = memberService.getUserInfo(userid);
 			session.setAttribute("dto", dto);
-			session.setAttribute("userid", userid);
-
-			mav.addObject("msg", dto.getName() +"님 환영합니다.");
 			
+			CompanyDTO cdto = companyService.getComInfo(dto.getCom_idx());
+			if(cdto !=null) {
+				session.setAttribute("cdto", cdto);
+			}					
+			
+			mav.addObject("msg", dto.getName() +"님 환영합니다.");			
 			mav.addObject("url", "goMain.do");
-			
 			mav.setViewName("member/message");
 		}
 		return mav;

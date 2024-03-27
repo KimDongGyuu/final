@@ -22,10 +22,14 @@
 }
 
 #bt {
-	width: 180px;
+	width: 150px;
 	height: 40px;
 }
 
+#comimg{
+	width: 150px;
+	height: 150px;
+}
 </style>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -34,9 +38,23 @@
 <body>
 	<div>
 		<div id="left">
-			<button id="bt" type="button" class="btn btn-outline-primary"
-				onclick="location.href='company_news_List.do?com_idx=${dto.getCom_idx()}';">목록</button>
-			
+		<button id="bt" type="button" class="btn btn-outline-primary"
+		onclick="confirmNavigation('company_news_List.do?com_idx=${dto.getCom_idx()}')">목록</button>
+		
+					
+		<div class="mt-3">
+		<a href="javascript:void(0);" onclick="confirmNavigation('goMain.do')"><img id="comimg" src="img/${cdto.com_name}/${cdto.com_img}"></a>
+
+		<script>
+		function confirmNavigation(url) {
+		    if (confirm("입력정보가 사라집니다. 그래도 이동하시겠습니까?")) {
+		        window.location.href = url;
+		    }
+		}
+		</script>
+
+		
+		</div>
 			
 			<div class="mt-3"><a href="company_news_List.do?com_idx=${dto.getCom_idx()}">회사소식</a> <br> <a href="company_event_List.do?com_idx=${dto.getCom_idx()}">경조사</a></div>
 			

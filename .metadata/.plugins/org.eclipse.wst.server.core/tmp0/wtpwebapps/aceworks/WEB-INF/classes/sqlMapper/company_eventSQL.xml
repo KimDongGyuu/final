@@ -96,5 +96,10 @@ where rownum = 1
 update company_event set event_readnum=event_readnum+1 where event_idx=#{event_idx}
 </update>
 
+<select id="comEvent3" parameterType="Integer" resultType="com.ace.company_event.model.Company_eventDTO">
+   select * from (select * from company_event where com_idx=#{com_idx} order by event_idx DESC)
+   where ROWNUM <![CDATA[<]]>= 5
+   </select>
+
 </mapper>
 

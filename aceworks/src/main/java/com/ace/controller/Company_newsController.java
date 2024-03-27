@@ -143,29 +143,17 @@ private company_newsService company_newsService;
 	mav.setViewName("company_news/company_newsMsg");
 	return mav;
 	}
-//	
-//	@RequestMapping("/company_news_PreviousNews")
-//	public ModelAndView company_newsPreviousNews(@RequestParam("news_idx") Integer news_idx,@RequestParam("com_idx") Integer com_idx) {
-//		Company_newsDTO newsDto = company_newsService.company_newsPreviousNews(news_idx,com_idx);
-//		
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("newsDto",newsDto);
-//		mav.addObject("news_idx",news_idx);
-//		mav.addObject("com_idx",com_idx);
-//		mav.setViewName("company_news/company_news_PreviousNews");
-//		return mav;
-//	}
-//	
-//	@RequestMapping("/company_news_NextNews")
-//	public ModelAndView company_newsNext(@RequestParam("news_idx") Integer news_idx,@RequestParam("com_idx") Integer com_idx) {
-//		Company_newsDTO newsDto = company_newsService.company_newsNextNews(news_idx,com_idx);
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("newsDto",newsDto);
-//		mav.addObject("news_idx",news_idx);
-//		mav.addObject("com_idx",com_idx);
-//		mav.setViewName("company_news/company_news_NextNews");
-//		return mav;
-//	}
+	
+	@RequestMapping("/comNews3.do")
+	   public ModelAndView comNews3(
+	         @RequestParam("com_idx")int com_idx
+	         ) {
+	      ModelAndView mav = new ModelAndView();
+	      List<Company_newsDTO> list = company_newsService.comNews3(com_idx);
+	      mav.addObject("list", list);
+	      mav.setViewName("member/checkNews");
+	      return mav;
+	   }
 }
 
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<form name="idpwMid" action="getMsg.do" method="post">
+<form name="idpwMid" action="idpwMemId.do" method="post">
 <table>
 <tr>
 	<th colspan="2">회원 아이디 찾기</th>

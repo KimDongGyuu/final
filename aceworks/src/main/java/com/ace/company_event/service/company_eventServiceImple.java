@@ -186,4 +186,10 @@ public class company_eventServiceImple implements company_eventService {
 		int count = Company_eventDao.company_eventReadnumUpdate(event_idx);
 		return count;
 	}
+	
+	@Override
+	public List<Company_eventDTO> comEvent3(int com_idx){
+	    List<Company_eventDTO> list = Company_eventDao.comEvent3(com_idx);
+	    return list;      
+	 }
 }

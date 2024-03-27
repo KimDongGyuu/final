@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/style.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#left {
+	width: 200px;
+	height: 600px;
+	float: left;
+	border-right: 2px solid black;
+	margin-left: 50px;
+}
+
+#right {
+	width: 900px;
+	height: 600px;
+	margin-left: 330px;
+}
+
+h3 {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div>
+	<div id="left">
+
+
+<div class="mt-3">회사 로고 만들고 바로가기 들어갈곳</div>
+		</div>
+		<div id="right">
+		<div class="mt-5 mb-2"><span class="h4">메일</span></div>
+
+			<table width="1000" cellspacing="0" class="table table-hover">
+				<thead>
+					<tr>
+					<th>이름</th>
+					<th>전화번호</th>
+					<th>E-mail</th>
+					</tr>
+				</thead>
+
+				<tbody class="table-group-divider">
+					<c:if test="${empty memberList }">
+						<tr>
+							<td colspan="5" align="center">등록된 사원이 없습니다</td>
+						</tr>
+					</c:if>
+					
+					<c:forEach var="memberList" items="${memberList }">
+					<tr class="text-center">
+					<th scope="row">${memberList.name }</th>
+					</tr>
+					</c:forEach>
+				</tbody>
+
+				<tfoot>
+
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

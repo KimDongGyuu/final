@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<form name="idpwMPwd" action="getMsg.do" method="post">
+<form name="idpwMPwd" action="idpwMemPwd.do" method="post">
 <table>
 <tr>
 	<th colspan="2">회원 비밀번호 찾기</th>
@@ -18,7 +18,7 @@
 		<input class="text" type="text" name="tel" placeholder="전화번호" autocomplete="off" required>
 	</td>
 	<td>
-		<input class="text" type="text" name="hum_num" placeholder="주민번호" autocomplete="off" required>
+		<input class="text" type="text" name="name" placeholder="이름" autocomplete="off" required>
 	</td>
 </tr>
 <tr>

@@ -14,12 +14,25 @@
    </bean>
    
    <!-- services -->
-   <bean id="company_newsService" class="com.ace.company_news.service.company_newsServiceImple">
-   <property name="company_newsDao" ref="company_newsDao"></property>
-   </bean>
-   <bean id="company_eventService" class="com.ace.company_event.service.company_eventServiceImple">
-   <property name="company_eventDao" ref="company_eventDao"></property>
-   </bean>
+<bean id="scheduleService" class="com.ace.schedule.service.ScheduleServiceImple">
+<property name="scheduleDao" ref="scheduleDao"/>
+</bean>
+<bean id="companyService" class="com.ace.company.service.CompanyServiceImple">
+<property name="companyDao" ref="companyDao"/>
+</bean>
+<bean id="memberService" class="com.ace.member.service.MemberServiceImple">
+<property name="memberDao" ref="memberDao"/>
+</bean>
+<bean id="client_telService" class="com.ace.client_tel.service.Client_TelServiceImple">
+<property name="client_telDao" ref="client_telDao"/>
+</bean>
+<bean id="company_newsService" class="com.ace.company_news.service.company_newsServiceImple">
+<property name="company_newsDao" ref="company_newsDao"/>
+</bean>
+<bean id="company_eventService" class="com.ace.company_event.service.company_eventServiceImple">
+<property name="company_eventDao" ref="company_eventDao"/>
+</bean>
+
   
    
    <!-- viewResolvers -->

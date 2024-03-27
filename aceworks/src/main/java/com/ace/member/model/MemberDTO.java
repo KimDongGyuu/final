@@ -16,6 +16,8 @@ public class MemberDTO {
 	private int rank_num;
 	private int sal;
 	private Date hiredate;
+	private String com_name;
+	private int usernum;
 	
 	public MemberDTO() {
 		super();
@@ -37,6 +39,26 @@ public class MemberDTO {
 		this.rank_num = rank_num;
 		this.sal = sal;
 		this.hiredate = hiredate;
+	}
+	
+	public MemberDTO(int idx, int com_idx, String name, String id, String pwd, String email, String addr, String tel,
+			String hum_num, String dept, int rank_num, int sal, Date hiredate, String com_name, int usernum) {
+		super();
+		this.idx = idx;
+		this.com_idx = com_idx;
+		this.name = name;
+		this.id = id;
+		this.pwd = pwd;
+		this.email = email;
+		this.addr = addr;
+		this.tel = tel;
+		this.hum_num = hum_num;
+		this.dept = dept;
+		this.rank_num = rank_num;
+		this.sal = sal;
+		this.hiredate = hiredate;
+		this.com_name = com_name;
+		this.usernum = usernum;
 	}
 
 	public int getIdx() {
@@ -141,6 +163,22 @@ public class MemberDTO {
 
 	public void setHiredate(Date hiredate) {
 		this.hiredate = hiredate;
+	}
+	///
+	public String getCom_name() {
+		return com_name;
+	}
+
+	public void setCom_name(String com_name) {
+		this.com_name = com_name;
+	}
+
+	public int getUsernum() {
+		return usernum;
+	}
+
+	public void setUsernum(int usernum) {
+		this.usernum = usernum;
 	}
 	
 }

@@ -103,6 +103,12 @@ public class Company_newsDAOImple implements Company_newsDAO {
 		Company_newsDTO newsDto = sqlmap.selectOne("company_newsSearchNextNews",map);
 		return newsDto;
 	}
+	
+	@Override
+	   public List<Company_newsDTO> comNews3(int com_idx) {
+	      List<Company_newsDTO> list = sqlmap.selectList("comNews3",com_idx);
+	      return list;
+	   }
 }
 
 
